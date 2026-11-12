@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>US Bank - Admin Dashboard</title>
     <style>
         :root {
@@ -18,8 +18,11 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
+        /* Utility class to force hide */
+        .hidden { display: none !important; }
+
         /* --- LOGIN VIEW STYLES --- */
-        body.login-body { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: var(--sidebar-bg); padding: 20px; }
+        body.login-body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--sidebar-bg); padding: 20px; }
         .login-card { background: #ffffff; padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 100%; max-width: 400px; text-align: center; }
         .login-logo { font-size: 28px; font-weight: 700; margin-bottom: 30px; }
         .login-logo span { background-color: #c8202e; color: white; padding: 2px 8px; border-radius: 4px 4px 10px 10px; margin-right: 4px; }
@@ -32,7 +35,8 @@
         .error { color: #ef4444; font-size: 14px; margin-top: 10px; display: none; }
 
         /* --- DASHBOARD VIEW STYLES (Mobile First) --- */
-        body.dash-body { display: flex; flex-direction: column; min-height: 100vh; background-color: var(--bg); }
+        body.dash-body { display: block; background-color: var(--bg); }
+        #dashboard-view { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
         
         .sidebar { background-color: var(--sidebar-bg); color: var(--text-light); padding: 15px; display: flex; flex-direction: row; align-items: center; overflow-x: auto; white-space: nowrap; }
         .sidebar h2 { font-size: 18px; margin-right: 20px; margin-bottom: 0; color: #fff; display: flex; align-items: center; gap: 8px; }
@@ -41,7 +45,7 @@
         .nav-item.active { background-color: #334155; color: #fff; }
         .logout-link { margin-left: auto; color: #f87171; cursor: pointer; font-weight: 600; padding: 8px 15px; font-size: 14px; }
 
-        .main-content { flex: 1; padding: 20px; overflow-y: auto; }
+        .main-content { flex: 1; padding: 20px; }
         .header { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
         .header h1 { color: var(--primary); font-size: 22px; }
         
@@ -56,7 +60,7 @@
         .btn { padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 15px; width: 100%; transition: 0.2s; color: #fff; background-color: var(--primary); margin-top: 10px; }
         .btn:hover { opacity: 0.9; }
         .btn-success { background-color: var(--success); }
-        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); width: auto; margin-top: 0; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); width: auto; margin-top: 0; padding: 8px 15px; font-size: 14px;}
         .btn-outline:hover { background: var(--primary); color: #fff; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr; gap: 20px; }
@@ -81,12 +85,13 @@
 
         /* Desktop adjustments */
         @media (min-width: 768px) {
-            body.dash-body { flex-direction: row; height: 100vh; }
+            body.dash-body { height: 100vh; overflow: hidden; }
+            #dashboard-view { flex-direction: row; height: 100vh; }
             .sidebar { flex-direction: column; width: 250px; height: 100vh; padding: 20px; overflow-x: hidden; }
             .sidebar h2 { margin-bottom: 30px; font-size: 20px; }
             .nav-item { margin-right: 0; margin-bottom: 5px; padding: 12px 15px; font-size: 16px; }
             .logout-link { margin-top: auto; margin-left: 0; padding: 12px 15px; font-size: 16px; }
-            .main-content { padding: 30px; }
+            .main-content { padding: 30px; overflow-y: auto; }
             .header { flex-direction: row; justify-content: space-between; align-items: center; }
             .header h1 { font-size: 28px; }
             .grid-2 { grid-template-columns: 1fr 1fr; }
@@ -116,11 +121,11 @@
     </div>
 
     <!-- DASHBOARD VIEW -->
-    <div id="dashboard-view" class="hidden" style="display: flex; width: 100%; height: 100%; flex-direction: inherit;">
+    <div id="dashboard-view" class="hidden">
         <div class="sidebar">
             <h2><span>us</span> Admin</h2>
-            <div class="nav-item active" onclick="showTab('users')">Users List</div>
-            <div class="nav-item" onclick="showTab('settings')">Bank Settings</div>
+            <div class="nav-item active" onclick="showTab('users', this)">Users List</div>
+            <div class="nav-item" onclick="showTab('settings', this)">Bank Settings</div>
             <div class="logout-link" onclick="logoutAdmin()">Log Out</div>
         </div>
 
@@ -138,7 +143,7 @@
             <div id="tab-manage" class="hidden">
                 <div class="header">
                     <h1>Manage: <span id="manage-username-title" style="color: #b91c1c;"></span></h1>
-                    <button class="btn btn-outline" onclick="showTab('users')">Back to List</button>
+                    <button class="btn btn-outline" onclick="showTab('users', document.querySelector('.nav-item'))">Back to List</button>
                 </div>
                 
                 <div class="grid-2">
@@ -227,17 +232,24 @@
         function showLogin() {
             document.getElementById('body-tag').className = 'login-body';
             document.getElementById('login-view').classList.remove('hidden');
+            document.getElementById('login-view').style.display = 'block'; // Force block
+            
             document.getElementById('dashboard-view').classList.add('hidden');
+            document.getElementById('dashboard-view').style.display = 'none'; // Force hide
         }
 
         function showDashboard() {
             document.getElementById('body-tag').className = 'dash-body';
             document.getElementById('login-view').classList.add('hidden');
+            document.getElementById('login-view').style.display = 'none'; // Force hide
+            
             document.getElementById('dashboard-view').classList.remove('hidden');
+            document.getElementById('dashboard-view').style.display = 'flex'; // Force flex
             
             document.getElementById('admin-auth-name').value = localStorage.getItem('auth_name') || 'IMF CODE';
             document.getElementById('admin-auth-code').value = localStorage.getItem('auth_code') || '';
             document.getElementById('admin-auth-enabled').checked = localStorage.getItem('auth_enabled') === 'true';
+            
             loadUsers();
         }
 
@@ -268,12 +280,14 @@
             renderUserList();
         }
 
-        function showTab(tabId) {
+        function showTab(tabId, element) {
             document.querySelectorAll('.main-content > div').forEach(div => div.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
             
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            event.target.classList.add('active');
+            if (element) {
+                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                element.classList.add('active');
+            }
         }
 
         function renderUserList() {
@@ -322,7 +336,7 @@
             document.getElementById('tx-desc').value = '';
             document.getElementById('tx-date').value = '';
 
-            showTab('manage');
+            showTab('manage', document.querySelector('.nav-item')); // Keep active state on Users List
         }
 
         window.updateStatus = function() {
