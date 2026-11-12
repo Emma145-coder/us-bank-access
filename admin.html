@@ -17,11 +17,9 @@
             --frozen-text: #0284c7;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
-        /* Utility class to force hide */
         .hidden { display: none !important; }
 
-        /* --- LOGIN VIEW STYLES --- */
+        /* LOGIN VIEW */
         body.login-body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--sidebar-bg); padding: 20px; }
         .login-card { background: #ffffff; padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 100%; max-width: 400px; text-align: center; }
         .login-logo { font-size: 28px; font-weight: 700; margin-bottom: 30px; }
@@ -31,10 +29,9 @@
         .login-input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #475569; font-size: 14px; }
         .login-input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; }
         .login-btn { width: 100%; padding: 14px; background-color: #002d72; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; }
-        .login-btn:hover { background-color: #001b4b; }
         .error { color: #ef4444; font-size: 14px; margin-top: 10px; display: none; }
 
-        /* --- DASHBOARD VIEW STYLES (Mobile First) --- */
+        /* DASHBOARD VIEW */
         body.dash-body { display: block; background-color: var(--bg); }
         #dashboard-view { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
         
@@ -58,19 +55,12 @@
         .form-group input[type="checkbox"] { width: auto; margin-right: 10px; transform: scale(1.2); cursor: pointer; }
         
         .btn { padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 15px; width: 100%; transition: 0.2s; color: #fff; background-color: var(--primary); margin-top: 10px; }
-        .btn:hover { opacity: 0.9; }
         .btn-success { background-color: var(--success); }
         .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); width: auto; margin-top: 0; padding: 8px 15px; font-size: 14px;}
-        .btn-outline:hover { background: var(--primary); color: #fff; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr; gap: 20px; }
         
-        /* User List */
-        .user-list-item { 
-            display: flex; flex-direction: column; gap: 15px;
-            padding: 20px; background: #fff; border-radius: 12px; margin-bottom: 15px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid var(--border);
-        }
+        .user-list-item { display: flex; flex-direction: column; gap: 15px; padding: 20px; background: #fff; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid var(--border); }
         .user-info h3 { color: #b91c1c; font-size: 18px; margin-bottom: 5px; }
         .user-info p { color: #64748b; font-size: 14px; margin-bottom: 3px; }
         .user-info .bal { font-size: 18px; font-weight: bold; color: #0f172a; margin-top: 8px; display: block; }
@@ -81,9 +71,7 @@
         .status-suspended { background: #fef08a; color: #854d0e; }
 
         .manage-btn { background: transparent; border: 2px solid #0f172a; color: #0f172a; padding: 10px 24px; border-radius: 20px; font-weight: 600; cursor: pointer; width: 100%; }
-        .manage-btn:hover { background: #0f172a; color: #fff; }
 
-        /* Desktop adjustments */
         @media (min-width: 768px) {
             body.dash-body { height: 100vh; overflow: hidden; }
             #dashboard-view { flex-direction: row; height: 100vh; }
@@ -106,7 +94,6 @@
     <div id="login-view" class="login-card">
         <div class="login-logo"><span>us</span> <span class="bank">bank</span></div>
         <h2 style="margin-bottom: 20px; color: #333;">Admin Portal</h2>
-        
         <div class="login-input-group">
             <label>Admin Email</label>
             <input type="email" id="admin-email" placeholder="admin@usbank.com">
@@ -115,7 +102,6 @@
             <label>Password</label>
             <input type="password" id="admin-pass" placeholder="••••••••••••">
         </div>
-        
         <button class="login-btn" onclick="loginAdmin()">Secure Login</button>
         <p class="error" id="error-msg">Invalid credentials. Access denied.</p>
     </div>
@@ -134,9 +120,9 @@
             <div id="tab-users">
                 <div class="header">
                     <h1>Manage Users</h1>
-                    <button class="btn btn-outline" onclick="loadUsers()">Refresh</button>
+                    <button class="btn btn-outline" onclick="loadUsers()">Refresh Data</button>
                 </div>
-                <div id="users-container"></div>
+                <div id="users-container">Loading...</div>
             </div>
 
             <!-- MANAGE SPECIFIC USER TAB -->
@@ -147,7 +133,6 @@
                 </div>
                 
                 <div class="grid-2">
-                    <!-- Status Card -->
                     <div class="card">
                         <h3>Account Status</h3>
                         <p style="margin-bottom: 15px; font-size: 14px;"><strong>Acct No:</strong> <span id="manage-acct-num"></span></p>
@@ -162,7 +147,6 @@
                         <button class="btn" onclick="updateStatus()">Update Status</button>
                     </div>
 
-                    <!-- Fund / Debit Card -->
                     <div class="card">
                         <h3>Fund / Debit Account</h3>
                         <div class="form-group"><label>Checking Balance ($)</label><input type="number" id="manage-checking" step="0.01"></div>
@@ -171,15 +155,14 @@
                     </div>
                 </div>
 
-                <!-- Transaction Card -->
                 <div class="card">
                     <h3>Create Transaction (Backdate & Debit/Fund)</h3>
                     <div class="grid-2">
                         <div class="form-group">
                             <label>Action</label>
                             <select id="tx-action">
-                                <option value="Credit">Credit (Add Money / Deposit)</option>
-                                <option value="Debit">Debit (Remove Money / Transfer)</option>
+                                <option value="Credit">Credit (Add Money)</option>
+                                <option value="Debit">Debit (Remove Money)</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -194,7 +177,7 @@
                         <div class="form-group"><label>Amount ($)</label><input type="number" id="tx-amount" step="0.01"></div>
                         <div class="form-group"><label>Backdate (Optional)</label><input type="date" id="tx-date"></div>
                     </div>
-                    <div class="form-group"><label>Description</label><input type="text" id="tx-desc" placeholder="e.g. Wire Transfer from John Doe"></div>
+                    <div class="form-group"><label>Description</label><input type="text" id="tx-desc" placeholder="e.g. Wire Transfer"></div>
                     <button class="btn" onclick="createTransaction()">Add to History & Update Balance</button>
                 </div>
             </div>
@@ -208,7 +191,7 @@
                     <div class="form-group"><label>Auth Code Value</label><input type="text" id="admin-auth-code" placeholder="e.g. SECURE-99"></div>
                     <div class="form-group" style="display:flex; align-items:center; margin-bottom: 20px;">
                         <input type="checkbox" id="admin-auth-enabled" style="width: 20px; height: 20px; margin-right: 10px;">
-                        <label for="admin-auth-enabled" style="margin-bottom:0; cursor:pointer; font-size: 15px;">Enable Auth Code on Transfers</label>
+                        <label for="admin-auth-enabled" style="margin-bottom:0; cursor:pointer;">Enable Auth Code on Transfers</label>
                     </div>
                     <button class="btn" onclick="saveAuthSettings()">Save Settings</button>
                 </div>
@@ -217,11 +200,31 @@
     </div>
 
     <script>
-        let users = JSON.parse(localStorage.getItem('bank_users')) || {};
+        let users = {};
+        let settings = {};
         let currentManageUsername = null;
 
-        // Check Auth Status on Load
+        // Seed default user if not exists
         window.onload = function() {
+            let existingUsers = JSON.parse(localStorage.getItem('bank_users')) || {};
+            
+            if (!existingUsers['jonathangeorgeroumie78@gmail.com']) {
+                existingUsers['jonathangeorgeroumie78@gmail.com'] = {
+                    name: "Jonathan George",
+                    username: "jonathangeorgeroumie78@gmail.com",
+                    password: "password123",
+                    email: "jonathangeorgeroumie78@gmail.com",
+                    phone: "(555) 123-4567",
+                    dob: "1990-01-01",
+                    acctNum: "6581029217",
+                    checking_bal: "150775000.00",
+                    savings_bal: "2500.25",
+                    status: "Active",
+                    transactions: []
+                };
+                localStorage.setItem('bank_users', JSON.stringify(existingUsers));
+            }
+
             if (sessionStorage.getItem('isAdminAuth') === 'true') {
                 showDashboard();
             } else {
@@ -232,19 +235,17 @@
         function showLogin() {
             document.getElementById('body-tag').className = 'login-body';
             document.getElementById('login-view').classList.remove('hidden');
-            document.getElementById('login-view').style.display = 'block'; // Force block
-            
+            document.getElementById('login-view').style.display = 'block';
             document.getElementById('dashboard-view').classList.add('hidden');
-            document.getElementById('dashboard-view').style.display = 'none'; // Force hide
+            document.getElementById('dashboard-view').style.display = 'none';
         }
 
         function showDashboard() {
             document.getElementById('body-tag').className = 'dash-body';
             document.getElementById('login-view').classList.add('hidden');
-            document.getElementById('login-view').style.display = 'none'; // Force hide
-            
+            document.getElementById('login-view').style.display = 'none';
             document.getElementById('dashboard-view').classList.remove('hidden');
-            document.getElementById('dashboard-view').style.display = 'flex'; // Force flex
+            document.getElementById('dashboard-view').style.display = 'flex';
             
             document.getElementById('admin-auth-name').value = localStorage.getItem('auth_name') || 'IMF CODE';
             document.getElementById('admin-auth-code').value = localStorage.getItem('auth_code') || '';
@@ -253,7 +254,6 @@
             loadUsers();
         }
 
-        // --- LOGIN LOGIC ---
         function loginAdmin() {
             const email = document.getElementById('admin-email').value;
             const pass = document.getElementById('admin-pass').value;
@@ -261,8 +261,6 @@
             if (email === "admin@usbank.com" && pass === "tqn8e5RLVVd2") {
                 sessionStorage.setItem('isAdminAuth', 'true');
                 document.getElementById('error-msg').style.display = 'none';
-                document.getElementById('admin-email').value = '';
-                document.getElementById('admin-pass').value = '';
                 showDashboard();
             } else {
                 document.getElementById('error-msg').style.display = 'block';
@@ -274,7 +272,6 @@
             showLogin();
         }
 
-        // --- DASHBOARD LOGIC ---
         function loadUsers() {
             users = JSON.parse(localStorage.getItem('bank_users')) || {};
             renderUserList();
@@ -321,7 +318,7 @@
             });
         }
 
-        window.manageUser = function(username) {
+        function manageUser(username) {
             currentManageUsername = username;
             const u = users[username];
             
@@ -331,30 +328,29 @@
             document.getElementById('manage-checking').value = u.checking_bal;
             document.getElementById('manage-savings').value = u.savings_bal;
             
-            // Clear transaction inputs
             document.getElementById('tx-amount').value = '';
             document.getElementById('tx-desc').value = '';
             document.getElementById('tx-date').value = '';
 
-            showTab('manage', document.querySelector('.nav-item')); // Keep active state on Users List
+            showTab('manage', document.querySelector('.nav-item'));
         }
 
-        window.updateStatus = function() {
+        function updateStatus() {
             users[currentManageUsername].status = document.getElementById('manage-status').value;
             localStorage.setItem('bank_users', JSON.stringify(users));
-            alert('Status Updated Successfully!');
+            alert('Status Updated!');
             renderUserList();
         }
 
-        window.saveBalances = function() {
+        function saveBalances() {
             users[currentManageUsername].checking_bal = document.getElementById('manage-checking').value;
             users[currentManageUsername].savings_bal = document.getElementById('manage-savings').value;
             localStorage.setItem('bank_users', JSON.stringify(users));
-            alert('Balances Updated Successfully!');
+            alert('Balances Updated!');
             renderUserList();
         }
 
-        window.createTransaction = function() {
+        function createTransaction() {
             const u = users[currentManageUsername];
             const action = document.getElementById('tx-action').value;
             const account = document.getElementById('tx-account').value;
@@ -369,7 +365,6 @@
             const formattedDate = txDateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             const refNo = 'ADM-' + Math.floor(100000 + Math.random() * 900000);
 
-            // Update Balances
             if (action === 'Credit') {
                 if (account === 'Checking') u.checking_bal = (parseFloat(u.checking_bal) + amount).toFixed(2);
                 else u.savings_bal = (parseFloat(u.savings_bal) + amount).toFixed(2);
@@ -378,23 +373,20 @@
                 else u.savings_bal = (parseFloat(u.savings_bal) - amount).toFixed(2);
             }
 
-            // Add Transaction
             const newTx = { type: action, from: account, to: desc, amount: amount.toFixed(2), ref: refNo, date: formattedDate };
             if (!u.transactions) u.transactions = [];
             u.transactions.unshift(newTx);
 
-            // Save to Storage
             localStorage.setItem('bank_users', JSON.stringify(users));
-            alert('Transaction Added Successfully!');
+            alert('Transaction Added!');
             
-            // Refresh the input fields
             document.getElementById('manage-checking').value = u.checking_bal;
             document.getElementById('manage-savings').value = u.savings_bal;
             document.getElementById('tx-amount').value = '';
             document.getElementById('tx-desc').value = '';
         }
 
-        window.saveAuthSettings = function() {
+        function saveAuthSettings() {
             localStorage.setItem('auth_name', document.getElementById('admin-auth-name').value);
             localStorage.setItem('auth_code', document.getElementById('admin-auth-code').value);
             localStorage.setItem('auth_enabled', document.getElementById('admin-auth-enabled').checked);
