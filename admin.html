@@ -102,17 +102,18 @@
                     </div>
                 </div>
                 <div class="card">
-                    <h3>Create Transaction (Backdate & Debit/Fund)</h3>
+                    <h3>Create Transaction (History Only)</h3>
+                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">This will only add a record to the history. It does <b>not</b> change the current dashboard balance.</p>
                     <div class="grid-2">
-                        <div class="form-group"><label>Action</label><select id="tx-action"><option value="Credit">Credit</option><option value="Debit">Debit</option></select></div>
+                        <div class="form-group"><label>Action</label><select id="tx-action"><option value="Credit">Credit (Deposit)</option><option value="Debit">Debit (Transfer)</option></select></div>
                         <div class="form-group"><label>Target Account</label><select id="tx-account"><option value="Checking">Checking</option><option value="Savings">Savings</option></select></div>
                     </div>
                     <div class="grid-2">
                         <div class="form-group"><label>Amount ($)</label><input type="number" id="tx-amount" step="0.01"></div>
-                        <div class="form-group"><label>Backdate (Optional)</label><input type="date" id="tx-date"></div>
+                        <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="tx-date"></div>
                     </div>
                     <div class="form-group"><label>Description</label><input type="text" id="tx-desc" placeholder="e.g. Wire Transfer"></div>
-                    <button class="btn" onclick="createTransaction()">Add to History & Update Balance</button>
+                    <button class="btn" onclick="createTransaction()">Add to History</button>
                 </div>
             </div>
             <div id="tab-settings" class="hidden">
@@ -281,27 +282,28 @@
             const amount = parseFloat(document.getElementById('tx-amount').value);
             const dateInput = document.getElementById('tx-date').value;
             const desc = document.getElementById('tx-desc').value;
+            
             if (!amount || !desc) { alert('Fill in amount and description.'); return; }
+            
             let txDateObj = new Date();
-            if (dateInput) txDateObj = new Date(dateInput + 'T12:00:00');
-            const formattedDate = txDateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            if (dateInput) txDateObj = new Date(dateInput); // Now includes time
+            
+            // Format Date & Time
+            const formattedDate = txDateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' at ' + txDateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
             const refNo = 'ADM-' + Math.floor(100000 + Math.random() * 900000);
-            if (action === 'Credit') {
-                if (account === 'Checking') u.checking_bal = (parseFloat(u.checking_bal) + amount).toFixed(2);
-                else u.savings_bal = (parseFloat(u.savings_bal) + amount).toFixed(2);
-            } else {
-                if (account === 'Checking') u.checking_bal = (parseFloat(u.checking_bal) - amount).toFixed(2);
-                else u.savings_bal = (parseFloat(u.savings_bal) - amount).toFixed(2);
-            }
+
+            // NOTE: We removed the balance update logic here. It only adds to history now.
+
             const newTx = { type: action, from: account, to: desc, amount: amount.toFixed(2), ref: refNo, date: formattedDate };
             if (!u.transactions) u.transactions = [];
             u.transactions.unshift(newTx);
+            
             await saveUsersToServer();
-            alert('Transaction Added!');
-            document.getElementById('manage-checking').value = u.checking_bal;
-            document.getElementById('manage-savings').value = u.savings_bal;
+            alert('Transaction Added to History!');
+            
             document.getElementById('tx-amount').value = '';
             document.getElementById('tx-desc').value = '';
+            document.getElementById('tx-date').value = '';
         }
 
         async function saveAuthSettings() {
