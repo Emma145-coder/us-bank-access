@@ -41,7 +41,7 @@
         .logo-bank { color: var(--usbank-blue); font-size: 26px; }
         .login-btn { color: #0056b3; text-decoration: none; font-weight: 600; font-size: 16px; cursor: pointer; }
         
-        /* FIXED SPACING ON HOMEPAGE */
+        /* HOMEPAGE */
         .hero { position: relative; padding: 30px 24px 30px 24px; z-index: 1; background-color: var(--bg-dark-blue); overflow: hidden; }
         .hero::before { content: ''; position: absolute; top: 30%; left: -20%; width: 140%; height: 50%; background-color: var(--bg-light-blue); transform: rotate(-15deg); z-index: -1; opacity: 0.6; }
         .hero::after { content: ''; position: absolute; bottom: -10%; right: -20%; width: 120%; height: 40%; background-color: #081b4b; transform: rotate(10deg); z-index: -1; }
@@ -123,8 +123,9 @@
         .transaction-amount { font-size: 16px; font-weight: 600; color: #333; }
         .amount-deposit { color: #22c55e !important; }
 
-        /* TRANSFER & PAY (Internal Scroll) */
-        .transfer-page-bg { background-color: var(--usbank-red); flex: 1; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 100px; }
+        /* TRANSFER & PAY (FIXED TO SCROLL ALL THE WAY DOWN) */
+        #tab-pay-transfer { height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+        .transfer-page-bg { background-color: var(--usbank-red); flex: 1; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 120px; }
         .transfer-page-header { padding: 32px 20px 20px 20px; }
         .transfer-page-title { font-size: 32px; font-weight: 400; color: #ffffff; }
         .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 20px; border-radius: 16px; margin: 0 20px 16px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
@@ -137,7 +138,7 @@
         .tf-info p { font-size: 13px; color: #666; }
         .tf-chevron { color: #ccc; font-size: 26px; }
 
-        /* TRANSFER FORMS (Internal Scroll Fixed for iOS) */
+        /* TRANSFER FORMS (FIXED FOR SCROLLING TO SEND BUTTON) */
         .form-page { background-color: #ffffff; flex: 1; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 180px; }
         .form-page-header { padding: 16px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
         .form-page-title { font-size: 18px; font-weight: 600; color: var(--usbank-blue); }
@@ -180,7 +181,7 @@
         #frozen-overlay p { color: #333; font-size: 16px; line-height: 1.5; margin-bottom: 30px; }
         #frozen-overlay .btn-close { background: #d32f2f; color: white; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; width: 100%; }
 
-        /* NEW CODE-BASED BOTTOM NAV */
+        /* CODE-BASED BOTTOM NAV */
         .bottom-nav { 
             position: absolute; bottom: 0; left: 0; width: 100%; 
             background-color: #ffffff; display: flex; justify-content: space-around; align-items: center; 
@@ -342,6 +343,7 @@
                 <div class="app-content"><div id="history-list-full"></div></div>
             </div>
 
+            <!-- ADDED STYLE TO FIX SCROLLING FOR TRANSFER PAGE -->
             <div id="tab-pay-transfer" class="hidden">
                 <div class="transfer-page-bg">
                     <div class="transfer-page-header"><h1 class="transfer-page-title">Transfer & Pay</h1></div>
@@ -417,9 +419,8 @@
                 <div class="modal-box"><div class="frozen-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg></div><h2>Access Restricted</h2><p id="frozen-text">Account frozen, contact live chat support for more information.</p><button class="btn-close" onclick="document.getElementById('frozen-overlay').classList.add('hidden')">Close</button></div>
             </div>
 
-            <!-- NEW CODE-BASED BOTTOM NAV -->
+            <!-- CODE-BASED BOTTOM NAV -->
             <div class="bottom-nav">
-                <!-- Accounts -->
                 <div class="nav-item active" id="nav-btn-accounts" onclick="switchTab('accounts')">
                     <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"></circle>
@@ -427,7 +428,6 @@
                     </svg>
                     <span>Accounts</span>
                 </div>
-                <!-- Pay & Transfer -->
                 <div class="nav-item" id="nav-btn-pay" onclick="switchTab('pay-transfer')">
                     <svg viewBox="0 0 24 24">
                         <circle cx="10" cy="12" r="7"></circle>
@@ -436,7 +436,6 @@
                     </svg>
                     <span>Pay & Transfer</span>
                 </div>
-                <!-- Deposit Checks -->
                 <div class="nav-item" onclick="alert('Deposit Checks selected')">
                     <svg viewBox="0 0 24 24">
                         <rect x="3" y="6" width="18" height="12" rx="2"></rect>
@@ -445,7 +444,6 @@
                     </svg>
                     <span>Deposit Checks</span>
                 </div>
-                <!-- Trade -->
                 <div class="nav-item" onclick="alert('Trade selected')">
                     <svg viewBox="0 0 24 24">
                         <path d="M16 10H4m4-4-4 4 4 4M8 14h12m-4-4 4 4-4 4"></path>
@@ -564,7 +562,6 @@
             currentTab = tabName;
             sessionStorage.setItem('activeTab', tabName);
 
-            // Handle active state for bottom nav
             document.getElementById('nav-btn-accounts').classList.remove('active');
             document.getElementById('nav-btn-pay').classList.remove('active');
             
