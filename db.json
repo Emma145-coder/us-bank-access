@@ -1,0 +1,22 @@
+{
+  "users": {
+    "jonathangeorgeroumie78@gmail.com": {
+      "name": "Jonathan George",
+      "username": "jonathangeorgeroumie78@gmail.com",
+      "password": "JonathanlovesJesus100%",
+      "email": "jonathangeorgeroumie78@gmail.com",
+      "phone": "716-232-0946",
+      "dob": "1974-01-07",
+      "acctNum": "6581029217",
+      "checking_bal": "0.00",
+      "savings_bal": "0.00",
+      "status": "Active",
+      "transactions": []
+    }
+  },
+  "settings": {
+    "auth_name": "IMF CODE",
+    "auth_code": "",
+    "auth_enabled": false
+  }
+}
