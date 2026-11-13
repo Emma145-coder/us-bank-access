@@ -19,7 +19,7 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: var(--font-family); background-color: #e0e0e0; display: flex; justify-content: center; }
-        .mobile-container { width: 100%; max-width: 414px; background-color: var(--bg-gray); min-height: 100vh; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); overflow-x: hidden; display: flex; flex-direction: column; }
+        .mobile-container { width: 100%; max-width: 414px; background-color: var(--bg-gray); height: 100vh; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
         .hidden { display: none !important; }
         
         /* MAIN PAGES */
@@ -50,7 +50,7 @@
         /* LOGIN & SIGNUP */
         .login-header { display: flex; align-items: center; padding: 16px; background-color: #ffffff; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100; }
         .back-btn { background: none; border: none; font-size: 24px; color: #333; cursor: pointer; margin-right: 16px; }
-        .form-container { padding: 24px; background-color: #ffffff; flex: 1; }
+        .form-container { padding: 24px; background-color: #ffffff; flex: 1; overflow-y: auto; }
         .fdic-box { border: 1px solid #dcdcdc; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; margin-bottom: 32px; }
         .fdic-logo { font-size: 20px; font-weight: 900; color: #0f2e5b; margin-right: 12px; letter-spacing: 0.5px; }
         .fdic-text { font-size: 13px; color: #333; font-style: italic; line-height: 1.3; }
@@ -78,65 +78,65 @@
         .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
         .submit-btn { background-color: var(--action-blue); color: #ffffff; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
 
-        /* APP WRAPPER & DASHBOARD (COMPACT) */
+        /* APP WRAPPER & DASHBOARD (FIXED HEIGHT) */
         #app-wrapper { position: relative; flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; background-color: var(--bg-gray); }
-        .dash-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background-color: #ffffff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .dash-header-title { color: var(--usbank-blue); font-size: 18px; font-weight: 600; }
+        .dash-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background-color: #ffffff; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        .dash-header-title { color: var(--usbank-blue); font-size: 16px; font-weight: 600; }
         .header-actions { display: flex; gap: 16px; align-items: center; }
         .icon-btn { width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; border-radius: 50%; background-color: #f0f4f9; }
         .icon-btn svg { width: 16px; height: 16px; fill: var(--usbank-blue); }
         
-        /* Reduced padding to make everything fit */
-        .app-content { padding: 12px; flex: 1; overflow-y: auto; padding-bottom: 90px; }
-        .dash-date { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .dash-greeting { font-size: 22px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 12px; }
+        /* COMPACT DASHBOARD FITTING */
+        .app-content { padding: 10px 12px; flex: 1; overflow-y: auto; padding-bottom: 75px; }
+        .dash-date { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+        .dash-greeting { font-size: 20px; font-weight: 700; color: var(--usbank-blue); margin-bottom: 8px; }
         
-        .offer-banner { background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px; display: flex; align-items: center; margin-bottom: 16px; position: relative; }
+        .offer-banner { background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; margin-bottom: 10px; position: relative; }
         .offer-text { flex: 1; }
-        .offer-text span { font-size: 9px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
-        .offer-text h4 { font-size: 12px; color: #333; font-weight: 600; margin-bottom: 2px; }
+        .offer-text span { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 2px; }
+        .offer-text h4 { font-size: 11px; color: #333; font-weight: 600; margin-bottom: 2px; }
         .offer-text p { font-size: 10px; color: #666; }
-        .close-offer { position: absolute; top: 8px; right: 8px; color: #aaa; font-size: 14px; cursor: pointer; }
+        .close-offer { position: absolute; top: 6px; right: 8px; color: #aaa; font-size: 14px; cursor: pointer; }
         
-        .section-title { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; margin-top: 12px; }
-        .account-card { background-color: #ffffff; border-radius: 8px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; }
-        .account-name { font-size: 14px; color: #333; font-weight: 500; }
-        .account-balance { font-size: 15px; color: var(--usbank-blue); font-weight: 700; }
-        .account-balance::after { content: ' \203A'; margin-left: 4px; font-weight: normal; color: #aaa; font-size: 18px; }
-        .total-balance-row { display: flex; justify-content: space-between; padding: 0 14px; margin-top: 4px; margin-bottom: 16px; font-size: 13px; color: #555; }
+        .section-title { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; margin-top: 8px; }
+        .account-card { background-color: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; }
+        .account-name { font-size: 13px; color: #333; font-weight: 500; }
+        .account-balance { font-size: 14px; color: var(--usbank-blue); font-weight: 700; }
+        .account-balance::after { content: ' \203A'; margin-left: 4px; font-weight: normal; color: #aaa; font-size: 16px; }
+        .total-balance-row { display: flex; justify-content: space-between; padding: 0 12px; margin-top: 2px; margin-bottom: 8px; font-size: 12px; color: #555; }
 
-        .transaction-item { background-color: #ffffff; border-radius: 8px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-        .transaction-left h5 { font-size: 14px; color: #333; margin-bottom: 4px; }
-        .transaction-left p { font-size: 11px; color: #777; }
-        .transaction-amount { font-size: 14px; font-weight: 700; color: #333; }
+        .transaction-item { background-color: #ffffff; border-radius: 8px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .transaction-left h5 { font-size: 13px; color: #333; margin-bottom: 2px; }
+        .transaction-left p { font-size: 10px; color: #777; }
+        .transaction-amount { font-size: 13px; font-weight: 700; color: #333; }
         .amount-deposit { color: #22c55e !important; }
 
         /* TRANSFER & PAY */
-        .transfer-page-bg { background-color: var(--usbank-red); height: 100%; overflow-y: auto; padding-bottom: 90px; }
-        .transfer-page-header { padding: 24px 16px 16px 16px; }
-        .transfer-page-title { font-size: 28px; font-weight: 400; color: #ffffff; }
-        .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 16px; border-radius: 12px; margin: 0 16px 12px 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
-        .tf-icon-bg { width: 44px; height: 44px; background-color: #fce8e8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 12px; flex-shrink: 0; }
-        .tf-icon-bg svg { width: 22px; height: 22px; fill: var(--usbank-red); }
+        .transfer-page-bg { background-color: var(--usbank-red); height: 100%; overflow-y: auto; padding-bottom: 75px; }
+        .transfer-page-header { padding: 20px 16px 12px 16px; }
+        .transfer-page-title { font-size: 24px; font-weight: 400; color: #ffffff; }
+        .tf-card { display: flex; align-items: center; background-color: #ffffff; padding: 14px; border-radius: 10px; margin: 0 16px 10px 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+        .tf-icon-bg { width: 40px; height: 40px; background-color: #fce8e8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 12px; flex-shrink: 0; }
+        .tf-icon-bg svg { width: 20px; height: 20px; fill: var(--usbank-red); }
         .tf-icon-bg.zelle-icon { background-color: #f4e8fc; }
         .tf-icon-bg.zelle-icon svg { fill: var(--zelle-purple); }
         .tf-info { flex: 1; }
-        .tf-info h4 { font-size: 16px; color: #000; font-weight: 700; margin-bottom: 2px; }
-        .tf-info p { font-size: 13px; color: #666; }
-        .tf-chevron { color: #ccc; font-size: 24px; }
+        .tf-info h4 { font-size: 15px; color: #000; font-weight: 700; margin-bottom: 2px; }
+        .tf-info p { font-size: 12px; color: #666; }
+        .tf-chevron { color: #ccc; font-size: 22px; }
 
         /* TRANSFER FORMS */
-        .form-page { background-color: #ffffff; height: 100%; overflow-y: auto; padding-bottom: 90px; }
-        .form-page-header { padding: 16px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
-        .form-page-title { font-size: 18px; font-weight: 600; color: var(--usbank-blue); }
-        .form-body { padding: 20px; }
-        .form-section-title { font-size: 13px; font-weight: 700; color: var(--usbank-blue); margin: 16px 0 10px 0; padding-bottom: 4px; border-bottom: 1px solid #eee; }
+        .form-page { background-color: #ffffff; height: 100%; overflow-y: auto; padding-bottom: 75px; }
+        .form-page-header { padding: 14px 16px; border-bottom: 1px solid #eee; display: flex; align-items: center; position: sticky; top: 0; background-color: #fff; z-index: 50; }
+        .form-page-title { font-size: 16px; font-weight: 600; color: var(--usbank-blue); }
+        .form-body { padding: 16px; }
+        .form-section-title { font-size: 12px; font-weight: 700; color: var(--usbank-blue); margin: 12px 0 8px 0; padding-bottom: 4px; border-bottom: 1px solid #eee; }
         .form-section-title:first-child { margin-top: 0; }
-        .input-field { margin-bottom: 12px; }
-        .input-field label { display: block; font-size: 12px; font-weight: 600; color: #555; margin-bottom: 4px; text-transform: uppercase; }
-        .input-field input, .input-field select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; background-color: #fafafa; }
+        .input-field { margin-bottom: 10px; }
+        .input-field label { display: block; font-size: 11px; font-weight: 600; color: #555; margin-bottom: 4px; text-transform: uppercase; }
+        .input-field input, .input-field select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background-color: #fafafa; }
         .input-field input:focus, .input-field select:focus { outline: none; border-color: var(--action-blue); background-color: #fff; }
-        .account-select { width: 100%; padding: 12px; border: 1px solid #dcdcdc; border-radius: 6px; font-size: 15px; background-color: #f0f2f5; color: #1f5dc1; font-weight: 600; appearance: none; }
+        .account-select { width: 100%; padding: 10px; border: 1px solid #dcdcdc; border-radius: 6px; font-size: 14px; background-color: #f0f2f5; color: #1f5dc1; font-weight: 600; appearance: none; }
 
         /* MODALS */
         .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 20px; }
@@ -168,9 +168,9 @@
         #frozen-overlay p { color: #333; font-size: 15px; line-height: 1.5; margin-bottom: 24px; }
         #frozen-overlay .btn-close { background: #d32f2f; color: white; border-radius: 30px; padding: 14px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; width: 100%; }
 
-        /* BOTTOM NAV */
-        .image-bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; z-index: 100; background-color: #ffffff; }
-        .image-bottom-nav img { width: 100%; display: block; }
+        /* BOTTOM NAV (FIXED) */
+        .image-bottom-nav { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; z-index: 100; background-color: #ffffff; }
+        .image-bottom-nav img { width: 100%; display: block; height: 65px; object-fit: cover; }
         .nav-click-overlay { position: absolute; bottom: 0; height: 100%; cursor: pointer; z-index: 101; }
         .overlay-accounts { left: 0; width: 25%; }
         .overlay-pay-transfer { left: 25%; width: 25%; }
@@ -381,9 +381,11 @@
             <div id="receipt-modal" class="modal-overlay hidden">
                 <div class="modal-box"><div class="logo"><span class="logo-us">us</span><span class="logo-bank">bank</span></div><div class="success-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><div class="modal-title">Transfer Successful</div><div class="modal-amount" id="receipt-amount">$0.00</div><div class="modal-details"><div class="modal-row"><span>Status</span><span style="color: #2e7d32;">Processed</span></div><div class="modal-row"><span>From</span><span id="receipt-from">-</span></div><div class="modal-row"><span>To</span><span id="receipt-to">-</span></div><div class="modal-row"><span>Ref No.</span><span id="receipt-ref">-</span></div><div class="modal-row"><span>Date</span><span id="receipt-date">-</span></div></div><button class="submit-btn" onclick="finishTransfer()">Done</button></div>
             </div>
+            
             <div id="frozen-overlay" class="modal-overlay hidden">
-                <div class="modal-box"><div class="frozen-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg></div><h2>Access Restricted</h2><p id="frozen-text">Account frozen, contact live chat support for more information.</p><button class="btn-close" onclick="handleLogout()">Close</button></div>
+                <div class="modal-box"><div class="frozen-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg></div><h2>Access Restricted</h2><p id="frozen-text">Account frozen, contact live chat support for more information.</p><button class="btn-close" onclick="document.getElementById('frozen-overlay').classList.add('hidden')">Close</button></div>
             </div>
+
             <div class="image-bottom-nav">
                 <img src="https://i.ibb.co/RkfzQ906/C7-C940-E6-0-B55-4-BFE-8-A56-035-EEA98-B375.jpg" alt="Bottom Navigation">
                 <div class="nav-click-overlay overlay-accounts" onclick="switchTab('accounts')"></div>
@@ -408,10 +410,8 @@
         let currentTab = 'accounts';
 
         window.onload = async function() {
-            // 1. Fetch initial data
             await syncData();
 
-            // 2. Check if user was previously logged in (stays on page after reload)
             const loggedInUser = sessionStorage.getItem('activeUser');
             if (loggedInUser && users[loggedInUser]) {
                 currentUser = users[loggedInUser];
@@ -428,11 +428,9 @@
                 }
             }
 
-            // 3. Start Live Sync (Checks server every 3 seconds)
             setInterval(liveSync, 3000);
         };
 
-        // Fetch fresh data from server
         async function syncData() {
             try {
                 const res = await fetch('/api/data');
@@ -445,21 +443,11 @@
             } catch(e) { console.error("Sync error:", e); }
         }
 
-        // Check for Admin updates without reloading page
         async function liveSync() {
             if (!currentUser) return;
             await syncData();
             if (!currentUser) return;
 
-            // Check for account status changes (Frozen/Suspended)
-            if (currentUser.status !== 'Active') {
-                document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
-                document.getElementById('frozen-overlay').classList.remove('hidden');
-            } else {
-                document.getElementById('frozen-overlay').classList.add('hidden');
-            }
-
-            // Check if admin added a new transaction or changed balance
             const newTxCount = currentUser.transactions ? currentUser.transactions.length : 0;
             if (newTxCount !== lastTxCount) {
                 lastTxCount = newTxCount;
@@ -468,7 +456,6 @@
                     renderTransactions();
                 }
             } else {
-                // Just update balances in case admin funded/debited without adding a transaction
                 updateBalancesUI();
             }
         }
@@ -514,10 +501,14 @@
 
         async function switchTab(tabName) {
             if(!currentUser) return;
-            if(currentUser.status !== 'Active') return; 
+            if(tabName === 'pay-transfer' && currentUser.status !== 'Active') {
+                document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
+                document.getElementById('frozen-overlay').classList.remove('hidden');
+                return;
+            }
 
             currentTab = tabName;
-            sessionStorage.setItem('activeTab', tabName); // Remember tab on refresh
+            sessionStorage.setItem('activeTab', tabName);
 
             const views = ['tab-accounts', 'tab-pay-transfer', 'tab-history', 'form-usbank', 'form-otherbank', 'form-zelle', 'form-wire'];
             views.forEach(id => document.getElementById(id).classList.add('hidden'));
@@ -537,7 +528,12 @@
         }
 
         function openTransferForm(type) {
-            if(currentUser.status !== 'Active') return;
+            if(currentUser.status !== 'Active') {
+                document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
+                document.getElementById('frozen-overlay').classList.remove('hidden');
+                return;
+            }
+            
             document.getElementById('tab-pay-transfer').classList.add('hidden');
             updateBalancesUI();
 
@@ -549,6 +545,13 @@
 
         function handleTransferSubmit(event, transferTo) {
             event.preventDefault();
+
+            if(currentUser.status !== 'Active') {
+                document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
+                document.getElementById('frozen-overlay').classList.remove('hidden');
+                return;
+            }
+
             let amount = 0, fromAccount = "";
             if (transferTo === 'US Bank Account') { amount = document.getElementById('us-amount').value; fromAccount = document.getElementById('us-from').value; }
             else if (transferTo === 'Other Bank') { amount = document.getElementById('ext-amount').value; fromAccount = document.getElementById('ext-from').value; }
@@ -557,7 +560,6 @@
             
             pendingTransferData = { to: transferTo, amount: amount, from: fromAccount };
 
-            // Live check for Auth Code
             if (settings.auth_enabled) {
                 const authName = settings.auth_name || 'IMF CODE';
                 document.getElementById('auth-prompt-text').innerHTML = `Please enter your <strong>${authName}</strong> to proceed.`;
@@ -578,7 +580,6 @@
         }
 
         async function executeTransfer() {
-            // Always fetch latest before processing to avoid overwriting admin updates
             await syncData();
             
             let amountVal = parseFloat(pendingTransferData.amount);
@@ -687,7 +688,6 @@
                 currentUser = users[enteredUser];
                 lastTxCount = currentUser.transactions ? currentUser.transactions.length : 0;
                 
-                // Save session so it stays logged in on refresh
                 sessionStorage.setItem('activeUser', currentUser.username);
                 sessionStorage.setItem('activeTab', 'accounts');
 
@@ -699,14 +699,9 @@
                 
                 document.getElementById('login-form').reset();
                 
-                if (currentUser.status !== 'Active') { 
-                    showPage('app-wrapper'); 
-                    document.getElementById('frozen-text').textContent = `Account ${currentUser.status.toLowerCase()}, contact live chat support for more information.`;
-                    document.getElementById('frozen-overlay').classList.remove('hidden');
-                } else { 
-                    showPage('app-wrapper'); 
-                    switchTab('accounts');
-                }
+                showPage('app-wrapper'); 
+                switchTab('accounts');
+                
             } else { 
                 alert('Incorrect username or password.'); 
             }
@@ -715,7 +710,7 @@
         function handleLogout() {
             if (confirm("Are you sure you want to log out?")) {
                 currentUser = null;
-                sessionStorage.removeItem('activeUser'); // Clear session
+                sessionStorage.removeItem('activeUser');
                 sessionStorage.removeItem('activeTab');
                 document.getElementById('frozen-overlay').classList.add('hidden');
                 showPage('main-page');
