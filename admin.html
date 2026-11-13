@@ -8,52 +8,70 @@
         :root { --primary: #002d72; --bg: #f4f7f6; --sidebar-bg: #1e293b; --text-light: #f8fafc; --border: #e2e8f0; --success: #22c55e; --frozen-blue: #e0f2fe; --frozen-text: #0284c7; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .hidden { display: none !important; }
+        
+        /* LOGIN VIEW */
         body.login-body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--sidebar-bg); padding: 20px; }
         .login-card { background: #ffffff; padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 100%; max-width: 400px; text-align: center; }
-        .login-logo { font-size: 28px; font-weight: 700; margin-bottom: 30px; }
-        .login-logo span { background-color: #c8202e; color: white; padding: 2px 8px; border-radius: 4px 4px 10px 10px; margin-right: 4px; }
-        .login-logo .bank { color: #002d72; }
+        
+        /* LOGIN LOGO - NEW IMAGE */
+        .login-logo img { height: 45px; width: auto; display: block; margin: 0 auto 30px auto; mix-blend-mode: multiply; }
+        
         .login-input-group { margin-bottom: 20px; text-align: left; }
         .login-input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #475569; font-size: 14px; }
         .login-input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; }
         .login-btn { width: 100%; padding: 14px; background-color: #002d72; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; }
         .error { color: #ef4444; font-size: 14px; margin-top: 10px; display: none; }
+        
+        /* DASHBOARD VIEW */
         body.dash-body { display: block; background-color: var(--bg); }
         #dashboard-view { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
+        
         .sidebar { background-color: var(--sidebar-bg); color: var(--text-light); padding: 15px; display: flex; flex-direction: row; align-items: center; overflow-x: auto; white-space: nowrap; }
-        .sidebar h2 { font-size: 18px; margin-right: 20px; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .sidebar h2 span { background-color: #d32f2f; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+        
+        /* SIDEBAR LOGO - NEW IMAGE IN WHITE CONTAINER */
+        .sidebar-brand { background-color: #ffffff; padding: 8px 16px; border-radius: 8px; margin-right: 20px; display: flex; justify-content: center; align-items: center; }
+        .sidebar-brand img { height: 24px; width: auto; mix-blend-mode: multiply; }
+        
         .nav-item { padding: 8px 15px; margin-right: 5px; border-radius: 8px; cursor: pointer; color: #cbd5e1; font-size: 14px; }
         .nav-item.active { background-color: #334155; color: #fff; }
         .logout-link { margin-left: auto; color: #f87171; cursor: pointer; font-weight: 600; padding: 8px 15px; font-size: 14px; }
+
         .main-content { flex: 1; padding: 20px; }
         .header { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
         .header h1 { color: var(--primary); font-size: 22px; }
+        
         .card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 20px; }
         .card h3 { margin-bottom: 15px; color: #333; font-size: 18px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #475569; font-size: 13px; }
         .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 16px; }
+        
         .btn { padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 15px; width: 100%; transition: 0.2s; color: #fff; background-color: var(--primary); margin-top: 10px; }
         .btn-success { background-color: var(--success); }
         .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); width: auto; margin-top: 0; padding: 8px 15px; font-size: 14px;}
+
         .grid-2 { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        
         .user-list-item { display: flex; flex-direction: column; gap: 15px; padding: 20px; background: #fff; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid var(--border); }
         .user-info h3 { color: #b91c1c; font-size: 18px; margin-bottom: 5px; }
         .user-info p { color: #64748b; font-size: 14px; margin-bottom: 3px; }
         .user-info .bal { font-size: 18px; font-weight: bold; color: #0f172a; margin-top: 8px; display: block; }
+        
         .status-badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 10px; }
         .status-active { background: #dcfce7; color: #166534; }
         .status-frozen { background: var(--frozen-blue); color: var(--frozen-text); }
         .status-suspended { background: #fef08a; color: #854d0e; }
+
         .manage-btn { background: transparent; border: 2px solid #0f172a; color: #0f172a; padding: 10px 24px; border-radius: 20px; font-weight: 600; cursor: pointer; width: 100%; }
+
         @media (min-width: 768px) {
             body.dash-body { height: 100vh; overflow: hidden; }
             #dashboard-view { flex-direction: row; height: 100vh; }
-            .sidebar { flex-direction: column; width: 250px; height: 100vh; padding: 20px; overflow-x: hidden; }
-            .sidebar h2 { margin-bottom: 30px; font-size: 20px; }
+            .sidebar { flex-direction: column; width: 250px; height: 100vh; padding: 20px; overflow-x: hidden; align-items: stretch; }
+            .sidebar-brand { margin-right: 0; margin-bottom: 30px; padding: 12px; }
             .nav-item { margin-right: 0; margin-bottom: 5px; padding: 12px 15px; font-size: 16px; }
-            .logout-link { margin-top: auto; margin-left: 0; padding: 12px 15px; font-size: 16px; }
+            .logout-link { margin-top: auto; margin-left: 0; padding: 12px 15px; font-size: 16px; text-align: center; }
             .main-content { padding: 30px; overflow-y: auto; }
             .header { flex-direction: row; justify-content: space-between; align-items: center; }
             .header h1 { font-size: 28px; }
@@ -64,36 +82,72 @@
     </style>
 </head>
 <body id="body-tag" class="login-body">
+
+    <!-- LOGIN VIEW -->
     <div id="login-view" class="login-card">
-        <div class="login-logo"><span>us</span> <span class="bank">bank</span></div>
+        <!-- NEW IMAGE LOGO -->
+        <div class="login-logo">
+            <img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank">
+        </div>
         <h2 style="margin-bottom: 20px; color: #333;">Admin Portal</h2>
-        <div class="login-input-group"><label>Admin Email</label><input type="email" id="admin-email" placeholder="admin@usbank.com"></div>
-        <div class="login-input-group"><label>Password</label><input type="password" id="admin-pass" placeholder="••••••••••••"></div>
+        
+        <div class="login-input-group">
+            <label>Admin Email</label>
+            <input type="email" id="admin-email" placeholder="admin@usbank.com">
+        </div>
+        <div class="login-input-group">
+            <label>Password</label>
+            <input type="password" id="admin-pass" placeholder="••••••••••••">
+        </div>
+        
         <button class="login-btn" onclick="loginAdmin()">Secure Login</button>
         <p class="error" id="error-msg">Invalid credentials. Access denied.</p>
     </div>
 
+    <!-- DASHBOARD VIEW -->
     <div id="dashboard-view" class="hidden">
         <div class="sidebar">
-            <h2><span>us</span> Admin</h2>
+            <!-- NEW IMAGE LOGO IN SIDEBAR -->
+            <div class="sidebar-brand">
+                <img src="https://i.ibb.co/Sw4RPZt4/IMG-7257.jpg" alt="US Bank">
+            </div>
             <div class="nav-item active" onclick="showTab('users', this)">Users List</div>
             <div class="nav-item" onclick="showTab('settings', this)">Bank Settings</div>
             <div class="logout-link" onclick="logoutAdmin()">Log Out</div>
         </div>
+
         <div class="main-content">
+            <!-- USERS LIST TAB -->
             <div id="tab-users">
-                <div class="header"><h1>Manage Users</h1><button class="btn btn-outline" onclick="loadUsers()">Refresh Data</button></div>
-                <div id="users-container">Loading...</div>
+                <div class="header">
+                    <h1>Manage Users</h1>
+                    <button class="btn btn-outline" onclick="loadUsers()">Refresh</button>
+                </div>
+                <div id="users-container"></div>
             </div>
+
+            <!-- MANAGE SPECIFIC USER TAB -->
             <div id="tab-manage" class="hidden">
-                <div class="header"><h1>Manage: <span id="manage-username-title" style="color: #b91c1c;"></span></h1><button class="btn btn-outline" onclick="showTab('users', document.querySelector('.nav-item'))">Back to List</button></div>
+                <div class="header">
+                    <h1>Manage: <span id="manage-username-title" style="color: #b91c1c;"></span></h1>
+                    <button class="btn btn-outline" onclick="showTab('users', document.querySelector('.nav-item'))">Back to List</button>
+                </div>
+                
                 <div class="grid-2">
                     <div class="card">
                         <h3>Account Status</h3>
                         <p style="margin-bottom: 15px; font-size: 14px;"><strong>Acct No:</strong> <span id="manage-acct-num"></span></p>
-                        <div class="form-group"><label>Change Status</label><select id="manage-status"><option value="Active">Active</option><option value="Frozen">Frozen</option><option value="Suspended">Suspended</option></select></div>
+                        <div class="form-group">
+                            <label>Change Status</label>
+                            <select id="manage-status">
+                                <option value="Active">Active</option>
+                                <option value="Frozen">Frozen</option>
+                                <option value="Suspended">Suspended</option>
+                            </select>
+                        </div>
                         <button class="btn" onclick="updateStatus()">Update Status</button>
                     </div>
+
                     <div class="card">
                         <h3>Fund / Debit Account</h3>
                         <div class="form-group"><label>Checking Balance ($)</label><input type="number" id="manage-checking" step="0.01"></div>
@@ -101,12 +155,25 @@
                         <button class="btn btn-success" onclick="saveBalances()">Update Balances</button>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3>Create Transaction (History Only)</h3>
                     <p style="font-size: 13px; color: #666; margin-bottom: 15px;">This will only add a record to the history. It does <b>not</b> change the current dashboard balance.</p>
                     <div class="grid-2">
-                        <div class="form-group"><label>Action</label><select id="tx-action"><option value="Credit">Credit (Deposit)</option><option value="Debit">Debit (Transfer)</option></select></div>
-                        <div class="form-group"><label>Target Account</label><select id="tx-account"><option value="Checking">Checking</option><option value="Savings">Savings</option></select></div>
+                        <div class="form-group">
+                            <label>Action</label>
+                            <select id="tx-action">
+                                <option value="Credit">Credit (Deposit)</option>
+                                <option value="Debit">Debit (Transfer)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Account</label>
+                            <select id="tx-account">
+                                <option value="Checking">Checking</option>
+                                <option value="Savings">Savings</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="grid-2">
                         <div class="form-group"><label>Amount ($)</label><input type="number" id="tx-amount" step="0.01"></div>
@@ -116,13 +183,18 @@
                     <button class="btn" onclick="createTransaction()">Add to History</button>
                 </div>
             </div>
+
+            <!-- SETTINGS TAB -->
             <div id="tab-settings" class="hidden">
                 <div class="header"><h1>Security Settings</h1></div>
                 <div class="card">
                     <h3>Authorization Code (IMF)</h3>
                     <div class="form-group"><label>Auth Name</label><input type="text" id="admin-auth-name" placeholder="e.g. IMF CODE"></div>
                     <div class="form-group"><label>Auth Code Value</label><input type="text" id="admin-auth-code" placeholder="e.g. SECURE-99"></div>
-                    <div class="form-group" style="display:flex; align-items:center; margin-bottom: 20px;"><input type="checkbox" id="admin-auth-enabled" style="width: 20px; height: 20px; margin-right: 10px;"><label for="admin-auth-enabled" style="margin-bottom:0; cursor:pointer;">Enable Auth Code</label></div>
+                    <div class="form-group" style="display:flex; align-items:center; margin-bottom: 20px;">
+                        <input type="checkbox" id="admin-auth-enabled" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <label for="admin-auth-enabled" style="margin-bottom:0; cursor:pointer; font-size: 15px;">Enable Auth Code on Transfers</label>
+                    </div>
                     <button class="btn" onclick="saveAuthSettings()">Save Settings</button>
                 </div>
             </div>
@@ -286,13 +358,10 @@
             if (!amount || !desc) { alert('Fill in amount and description.'); return; }
             
             let txDateObj = new Date();
-            if (dateInput) txDateObj = new Date(dateInput); // Now includes time
+            if (dateInput) txDateObj = new Date(dateInput); 
             
-            // Format Date & Time
             const formattedDate = txDateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' at ' + txDateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
             const refNo = 'ADM-' + Math.floor(100000 + Math.random() * 900000);
-
-            // NOTE: We removed the balance update logic here. It only adds to history now.
 
             const newTx = { type: action, from: account, to: desc, amount: amount.toFixed(2), ref: refNo, date: formattedDate };
             if (!u.transactions) u.transactions = [];
